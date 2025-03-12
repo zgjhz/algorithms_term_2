@@ -5,7 +5,7 @@
 # 4 3 8 0 2
 # 5 6 3 4 0
 
-
+import time
 import sys
 import numpy as np
 import networkx as nx
@@ -14,6 +14,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QLa
 
 cities = []
 distance_matrix = np.array([])
+has_cycle = True
 
 def parse_graph_input(graph_text):
     global cities, distance_matrix
@@ -49,7 +50,10 @@ def nearest_neighbor_tsp(matrix, start=0, optimization=False):
         path.append(nearest_index)
         visited[nearest_index] = True
     
-    path.append(start)  # Возвращаемся в начальный город
+    if matrix[path[-1]][start] <= 0:
+        path.append(start)
+        has_cycle = False
+
     
     if optimization:
         best_path = path
@@ -112,8 +116,13 @@ class TSPApp(QWidget):
         graph_text = self.graph_input.toPlainText()
         parse_graph_input(graph_text)
         use_optimization = self.optimization_checkbox.isChecked()
+        time_s = time.time()
         path = nearest_neighbor_tsp(distance_matrix, optimization=use_optimization)
-        formatted_path = ' → '.join([cities[i] for i in path])
+        print(time.time() - time_s)
+        if has_cycle:
+            formatted_path = ' → '.join([cities[i] for i in path])
+        else:
+            formatted_path = "Нет такого пути"
         self.result_label.setText(f"Оптимальный путь: {formatted_path}")
         # self.path_label.setText(f"Путь: {' → '.join([cities[i] for i in path])}")
         draw_graph(path)
