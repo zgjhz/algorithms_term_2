@@ -1,35 +1,3 @@
-# A B C D E
-# 0 3 1 4 8
-# 2 0 5 1 3
-# 6 2 0 3 7
-# 4 3 8 0 2
-# 5 6 3 4 0
-
-# A B C D E
-# 0 3 0 0 0
-# 3 0 2 0 0
-# 0 2 0 4 0
-# 0 0 4 0 0
-# 0 0 0 0 0
-
-# A B C D E F G H I J K L M N O
-# 0  3  17 16 20  7  2  1  5  3 15 17 14 16 19
-# 14 0  17 17 11 13 11 20 4  17 8  9  18 20 11
-# 8  4  0  15 12 14 18 18 5  7  9  3  11 15 12
-# 5  7  16 0  18 8  15 10 8  5  11 13 15 11 17
-# 13 13 11 20 0  16 6  9  1  9  15 5  1  15 10
-# 2  17 11 12 15 0  10 9  1  6  6  18 15 6  15
-# 4  18 9  14 13 13 0  3  16 8  6  2  6  19 15
-# 12 18 15 11 6  19 5  0  6  4  17 12 19 3  12
-# 8  12 16 2  18 5  7  15 0  7  7  2  1  6  4
-# 11 12 3  15 8  18 18 8  17 0  12 10 9  17 20
-# 8  3  20 14 18 19 8  18 18 2  0  15 5  2  13
-# 13 6  20 2  4  19 10 8  19 8  8  0  17 7  1
-# 11 9  4  11 14 5  10 20 7  2  1  16 0  18 4
-# 16 9  12 19 14 10 2  2  20 5  1  5  20 0  1
-# 10 12 15 19 14 17 5  14 15 1  6  16 1  15 0
-
-
 import sys
 import time
 import numpy as np
@@ -54,49 +22,45 @@ def parse_graph_input(graph_text):
         for j in range(n):
             distance_matrix[i - 1][j] = values[j]
 
-def nearest_neighbor_tsp(matrix, start=0, optimization=False):
+def simulated_annealing_tsp(matrix, start=0, cauchy_modification=False):
+    def path_length(path):
+        return sum(matrix[path[i]][path[i + 1]] for i in range(len(path) - 1))
+    
     n = len(matrix)
-    visited = [False] * n
-    path = [start]
-    visited[start] = True
+    current_path = list(range(n)) + [start]
+    np.random.shuffle(current_path[:-1])
+    current_cost = path_length(current_path)
+    best_path, best_cost = current_path[:], current_cost
     
-    for _ in range(n - 1):
-        last = path[-1]
-        nearest = np.inf
-        nearest_index = -1
-        
-        for i in range(n):
-            if not visited[i] and matrix[last][i] > 0 and matrix[last][i] < nearest:
-                nearest = matrix[last][i]
-                nearest_index = i
-        
-        if nearest_index == -1:
-            return [], 0
-        
-        path.append(nearest_index)
-        visited[nearest_index] = True
+    T = 1000.0  # Начальная температура
+    T_min = 0.1  # Минимальная температура
+    alpha = 0.99  # Скорость охлаждения
+    iteration = 1
     
-    if matrix[path[-1]][start] > 0:
-        path.append(start)
-    else:
-        return [], 0
-    
-    path_length = sum(matrix[path[i]][path[i + 1]] for i in range(len(path) - 1))
-    
-    if optimization:
-        best_path = path
-        best_cost = path_length
+    while T > T_min:
+        i, j = np.random.randint(1, n - 1, size=2)
+        if i > j:
+            i, j = j, i
         
-        for new_start in range(n):
-            if new_start == start:
-                continue
-            new_path, new_cost = nearest_neighbor_tsp(matrix, start=new_start)
-            if new_path and new_cost < best_cost:
-                best_path, best_cost = new_path, new_cost
+        new_path = current_path[:]
+        new_path[i:j] = reversed(new_path[i:j])
+        new_cost = path_length(new_path)
         
-        return best_path, best_cost
+        delta = new_cost - current_cost
+        if cauchy_modification:
+            probability = np.exp(-delta / (T / iteration))  # Модификация отжига Коши
+        else:
+            probability = np.exp(-delta / T)
+        
+        if delta < 0 or np.random.rand() < probability:
+            current_path, current_cost = new_path, new_cost
+            if current_cost < best_cost:
+                best_path, best_cost = current_path[:], current_cost
+        
+        T *= alpha
+        iteration += 1
     
-    return path, path_length
+    return best_path, best_cost
 
 def draw_graph(path):
     if not path:
@@ -253,11 +217,11 @@ class TSPApp(QWidget):
             matrix = self.generate_random_graph(n)
             
             start_time = time.time()
-            path_normal, cost_normal = nearest_neighbor_tsp(matrix, optimization=False)
+            path_normal, cost_normal = simulated_annealing_tsp(matrix, cauchy_modification=False)
             time_normal = time.time() - start_time
             
             start_time = time.time()
-            path_cauchy, cost_cauchy = nearest_neighbor_tsp(matrix, optimization=True)
+            path_cauchy, cost_cauchy = simulated_annealing_tsp(matrix, cauchy_modification=True)
             time_cauchy = time.time() - start_time
             
             results.append((n, cost_normal, time_normal, cost_cauchy, time_cauchy))
@@ -269,10 +233,7 @@ class TSPApp(QWidget):
     def solve_tsp(self):
         use_optimization = self.optimization_checkbox.isChecked()
         start_index = self.start_node_selector.currentIndex()
-        
-        self.test_algorithm()
-        path, path_length = nearest_neighbor_tsp(distance_matrix, start=start_index, optimization=use_optimization)
-        
+        path, path_length = simulated_annealing_tsp(distance_matrix, start=start_index, cauchy_modification=use_optimization)
         if path:
             formatted_path = ' → '.join([cities[i] for i in path])
             self.result_label.setText(f"Оптимальный путь: {formatted_path}")
@@ -288,6 +249,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = TSPApp()
     ex.setWindowTitle("Задача коммивояжёра (Ориентированный граф)")
-    ex.resize(400, 400)
+
     ex.show()
     sys.exit(app.exec_())
