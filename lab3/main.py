@@ -68,72 +68,101 @@ def parse_graph_input(graph_text):
         for j in range(n):
             distance_matrix[i - 1][j] = values[j]
 
-import random
-import math
+def ant_colony_tsp(adj_matrix, elite_ants=False, n_ants=None, n_iterations=100, decay=0.5, alpha=1.0, beta=2.0):
+    """
+    Решение задачи коммивояжёра методом муравьиного алгоритма для направленного графа.
+    Гарантируется посещение всех вершин и возврат в стартовую, либо возвращается пустой путь
+    при невозможности построить тур.
+    
+    Параметры:
+        adj_matrix: квадратная матрица смежности (numpy array или список списков),
+                    диагональные элементы == 0, остальные > 0 (иначе ребро считается отсутствующим).
+        elite_ants: bool – включить модификацию "э��итных муравьёв".
+        n_ants: число муравьёв (по умолчанию = числу вершин).
+        n_iterations: число итераций алгоритма.
+        decay: коэффициент испарения феромонов (0 < decay < 1).
+        alpha: степень влияния феромонов.
+        beta: степень влияния эвристики (1/длины ребра).
+    Возвращает:
+        best_path: список индексов вершин лучшего тура (с возвратом в стартовую),
+                   или [] если тур не найден.
+        best_cost: стоимость тура, или None если тур не найден.
+    """
+    adj = np.array(adj_matrix, dtype=float)
+    num_nodes = adj.shape[0]
+    if n_ants is None:
+        n_ants = num_nodes
 
-def simulated_annealing_tsp(matrix, start=4, cauchy_modification=False, T=1000.0, alpha=0.99):
-    n = len(matrix)
-    # 1) NN-инициализация
-    unvisited = set(range(n))
-    unvisited.remove(start)
-    path = [start]
-    cur = start
-    while unvisited:
-        # выбираем ближайшую доступную вершину
-        candidates = [(matrix[cur][v], v) for v in unvisited if matrix[cur][v] > 0]
-        if not candidates:
-            # нет ходов — заканчиваем
-            break
-        _, nxt = min(candidates, key=lambda x: x[0])
-        path.append(nxt)
-        unvisited.remove(nxt)
-        cur = nxt
+    pheromone = np.ones((num_nodes, num_nodes))
+    heuristic = np.where(adj > 0, 1.0 / adj, 0.0)
 
-    # вспомогательная функция для расчёта стоимости цикла
-    def path_cost(p):
-        total = 0.0
-        for i in range(len(p)):
-            j = (i + 1) % len(p)
-            w = matrix[p[i]][p[j]]
-            if w <= 0:
-                return float('inf')
-            total += w
-        return total
+    best_cost = float('inf')
+    best_path = None
+    Q = 1.0
+    elite_weight = n_ants if elite_ants else 0
 
-    best_path = path[:]
-    best_cost = path_cost(best_path)
-    current_path = best_path[:]
-    current_cost = best_cost
+    for _ in range(n_iterations):
+        all_paths = []
+        for _ in range(n_ants):
+            start = random.randrange(num_nodes)
+            path = [start]
+            visited = {start}
+            current = start
+            cost = 0.0
+            feasible = True
 
-    Tmin = 1e-8  # порог завершения
+            # Построение тура
+            while len(path) < num_nodes:
+                candidates = [j for j in range(num_nodes) if j not in visited and adj[current, j] > 0]
+                if not candidates:
+                    feasible = False
+                    break
 
-    # 2) основной цикл SA
-    while T > Tmin:
-        i, j = sorted(random.sample(range(len(current_path)), 2))
-        candidate = current_path[:]
-        candidate[i:j] = candidate[i:j][::-1]
-        d = path_cost(candidate)
-        delta = d - current_cost
+                tau = pheromone[current, candidates] ** alpha
+                eta = heuristic[current, candidates] ** beta
+                probs = tau * eta
+                total = probs.sum()
+                if total <= 0 or np.isnan(total):
+                    feasible = False
+                    break
 
-        if delta < 0 or math.exp(-delta / T) > random.random():
-            current_path, current_cost = candidate, d
-            if current_cost < best_cost:
-                best_cost = current_cost
-                best_path = current_path[:]
+                probs = probs / total
+                next_city = np.random.choice(candidates, p=probs)
+                path.append(next_city)
+                visited.add(next_city)
+                cost += adj[current, next_city]
+                current = next_city
 
-        # 3) охлаждение
-        if cauchy_modification:
-            T = T / (1 + 0.01 * T)
-        else:
-            T *= alpha
+            if not feasible or adj[current, start] <= 0:
+                continue
 
-    # 4) приводим к началу с `start`
-    if start in best_path:
-        idx = best_path.index(start)
-        best_path = best_path[idx:] + best_path[:idx]
+            # Возврат в старт
+            path.append(start)
+            cost += adj[current, start]
+            all_paths.append((path, cost))
+
+            if cost < best_cost:
+                best_cost = cost
+                best_path = path.copy()
+
+        if not all_paths:
+            continue
+
+        # Обновление феромонов
+        pheromone *= (1 - decay)
+        for p, c in all_paths:
+            for i in range(len(p) - 1):
+                pheromone[p[i], p[i + 1]] += Q / c
+
+        # Элитные муравьи
+        if elite_ants and best_path is not None:
+            for i in range(len(best_path) - 1):
+                pheromone[best_path[i], best_path[i + 1]] += elite_weight * (Q / best_cost)
+
+    if best_path is None:
+        return [], None
 
     return best_path, best_cost
-
 
 def path_cost(matrix, path):
     cost = 0
@@ -257,17 +286,25 @@ class TSPApp(QWidget):
         self.add_graph_button.clicked.connect(self.load_graph)
         self.optimization_checkbox = QCheckBox("Включить модификацию Коши")
 
-        self.start_node_label = QLabel("Выберите начальный город:")
-        self.start_node_selector = QComboBox()
+        # self.start_node_label = QLabel("Выберите начальный город:")
+        # self.start_node_selector = QComboBox()
 
         # Добавляем поля для гиперпараметров
-        self.initial_temp_label = QLabel("Начальная температура:")
-        self.initial_temp_input = QTextEdit("1000.0")
-        self.initial_temp_input.setFixedHeight(30)
+        self.iteration_label = QLabel("количество итераций:")
+        self.iterations_input = QTextEdit("100")
+        self.iterations_input.setFixedHeight(30)
 
-        self.cooling_rate_label = QLabel("Коэффициент охлаждения (0 < alpha < 1):")
-        self.cooling_rate_input = QTextEdit("0.99")
-        self.cooling_rate_input.setFixedHeight(30)
+        self.decay_lable = QLabel("коэффициент затухания:")
+        self.decay_input = QTextEdit("0.99")
+        self.decay_input.setFixedHeight(30)
+
+        self.alpha_label = QLabel("alpha:")
+        self.alpha_input = QTextEdit("1.0")
+        self.alpha_input.setFixedHeight(30)
+
+        self.beta_label = QLabel("beta:")
+        self.beta_input = QTextEdit("2.0")
+        self.beta_input.setFixedHeight(30)
 
         self.button = QPushButton("Найти путь")
         self.button.clicked.connect(self.solve_tsp)
@@ -280,14 +317,18 @@ class TSPApp(QWidget):
         layout.addWidget(self.graph_input)
         layout.addWidget(self.draw_graph_button)
         layout.addWidget(self.add_graph_button)
-        layout.addWidget(self.start_node_label)
-        layout.addWidget(self.start_node_selector)
+        # layout.addWidget(self.start_node_label)
+        # layout.addWidget(self.start_node_selector)
         layout.addWidget(self.optimization_checkbox)
 
-        layout.addWidget(self.initial_temp_label)
-        layout.addWidget(self.initial_temp_input)
-        layout.addWidget(self.cooling_rate_label)
-        layout.addWidget(self.cooling_rate_input)
+        layout.addWidget(self.iteration_label)
+        layout.addWidget(self.iterations_input)
+        layout.addWidget(self.decay_lable)
+        layout.addWidget(self.decay_input)
+        layout.addWidget(self.alpha_label)
+        layout.addWidget(self.alpha_input)
+        layout.addWidget(self.beta_label)
+        layout.addWidget(self.beta_input)
 
         layout.addWidget(self.button)
         layout.addWidget(self.result_label)
@@ -301,8 +342,8 @@ class TSPApp(QWidget):
         parse_graph_input(graph_text)
         if hasattr(self, 'graph_editor') and self.graph_editor.nodes:
             cities, distance_matrix = self.graph_editor.get_graph_data()
-        self.start_node_selector.clear()
-        self.start_node_selector.addItems(cities)
+        # self.start_node_selector.clear()
+        # self.start_node_selector.addItems(cities)
     
     def open_graph_editor(self):
         self.graph_editor = GraphEditor(self)
@@ -312,7 +353,7 @@ class TSPApp(QWidget):
         return np.loadtxt(filepath, dtype=int)
 
     def test_algorithm(self):
-        node_sizes = [6, 10, 15, 30, 100]
+        node_sizes = [6, 10, 15, 30]
         num_runs = 30
         results = []
 
@@ -325,12 +366,12 @@ class TSPApp(QWidget):
 
             for _ in range(num_runs):
                 start_time = time.time()
-                _, cost_normal = simulated_annealing_tsp(matrix, cauchy_modification=False)
+                _, cost_normal = ant_colony_tsp(matrix, elite_ants=False)
                 times_normal.append(time.time() - start_time)
                 costs_normal.append(cost_normal)
 
                 start_time = time.time()
-                _, cost_cauchy = simulated_annealing_tsp(matrix, cauchy_modification=True)
+                _, cost_cauchy = ant_colony_tsp(matrix, elite_ants=True)
                 times_cauchy.append(time.time() - start_time)
                 costs_cauchy.append(cost_cauchy)
 
@@ -347,35 +388,23 @@ class TSPApp(QWidget):
     
     def solve_tsp(self):
         use_optimization = self.optimization_checkbox.isChecked()
-        start_index = self.start_node_selector.currentIndex()
 
-        try:
-            initial_temp = float(self.initial_temp_input.toPlainText())
-            cooling_rate = float(self.cooling_rate_input.toPlainText())
-            if not (0 < cooling_rate < 1):
-                raise ValueError("Коэффициент охлаждения должен быть от 0 до 1")
-        except ValueError as e:
-            self.result_label.setText(f"Ошибка ввода гиперпараметров: {e}")
-            return
+        iterations = int(self.iterations_input.toPlainText())
+        decay = float(self.decay_input.toPlainText())
+        aplpha = float(self.alpha_input.toPlainText())
+        beta = float(self.beta_input.toPlainText())
         # self.test_algorithm()
-        self.test_algorithm()
-        # path, path_length = simulated_annealing_tsp(
-        #     distance_matrix, 
-        #     start=start_index, 
-        #     cauchy_modification=use_optimization,
-        #     T=initial_temp,
-        #     alpha=cooling_rate
-        # )
+        path, path_length = ant_colony_tsp(distance_matrix, elite_ants=use_optimization, n_ants=len(cities), n_iterations=iterations, decay=decay, alpha=aplpha, beta=beta)
 
-        # if path:
-        #     formatted_path = ' → '.join([cities[i] for i in path])
-        #     self.result_label.setText(f"Оптимальный путь: {formatted_path}")
-        #     self.path_length_label.setText(f"Длина пути: {path_length}")
-        #     draw_graph(path)
-        # else:
-        #     self.result_label.setText("Невозможно построить цикл, возвращающийся в начальный город.")
-        #     self.path_label.setText("")
-        #     self.path_length_label.setText("")
+        if path:
+            formatted_path = ' → '.join([cities[i] for i in path])
+            self.result_label.setText(f"Оптимальный путь: {formatted_path}")
+            self.path_length_label.setText(f"Длина пути: {path_length}")
+            draw_graph(path)
+        else:
+            self.result_label.setText("Невозможно построить цикл, возвращающийся в начальный город.")
+            self.path_label.setText("")
+            self.path_length_label.setText("")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
