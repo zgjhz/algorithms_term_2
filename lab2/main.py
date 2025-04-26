@@ -68,67 +68,72 @@ def parse_graph_input(graph_text):
         for j in range(n):
             distance_matrix[i - 1][j] = values[j]
 
+import random
+import math
+
 def simulated_annealing_tsp(matrix, start=4, cauchy_modification=False, T=1000.0, alpha=0.99):
     n = len(matrix)
-    
-    def is_valid_path(path):
-        for i in range(len(path) - 1):
-            if matrix[path[i]][path[i+1]] == 0:
-                return False
-        if matrix[path[-1]][path[0]] == 0:
-            return False
-        return True
+    # 1) NN-инициализация
+    unvisited = set(range(n))
+    unvisited.remove(start)
+    path = [start]
+    cur = start
+    while unvisited:
+        # выбираем ближайшую доступную вершину
+        candidates = [(matrix[cur][v], v) for v in unvisited if matrix[cur][v] > 0]
+        if not candidates:
+            # нет ходов — заканчиваем
+            break
+        _, nxt = min(candidates, key=lambda x: x[0])
+        path.append(nxt)
+        unvisited.remove(nxt)
+        cur = nxt
 
-    # Попытка генерировать начальное решение методом ближайшего соседа
-    initial_path, initial_cost = nearest_neighbor_tsp(matrix, start, optimization=True)
-    if initial_path:  
-        # Удаляем завершающий повтор стартового узла, т.к. в SA путь не содержит замыкания
-        current_path = initial_path[:-1]
-    else:
-        # Если nearest_neighbor_tsp не удалось построить путь, используем случайную генерацию
-        attempts = 0
-        while True:
-            candidate = [start] + random.sample([i for i in range(n) if i != start], n - 1)
-            if is_valid_path(candidate):
-                current_path = candidate
-                break
-            attempts += 1
-            if attempts > 10000:
-                current_path = []
-                break
-                
-        # Если и после 10000 попыток не удалось построить допустимый путь, возвращаем пустой результат
-        if not current_path:
-            return [], 0
+    # вспомогательная функция для расчёта стоимости цикла
+    def path_cost(p):
+        total = 0.0
+        for i in range(len(p)):
+            j = (i + 1) % len(p)
+            w = matrix[p[i]][p[j]]
+            if w <= 0:
+                return float('inf')
+            total += w
+        return total
 
-    current_cost = path_cost(matrix, current_path)
-    best_path = current_path[:]
-    best_cost = current_cost
+    best_path = path[:]
+    best_cost = path_cost(best_path)
+    current_path = best_path[:]
+    current_cost = best_cost
 
-    while T > 1e-8:
-        # 2-opt перестановка
-        i, j = sorted(random.sample(range(1, n), 2))
-        new_path = current_path[:]
-        new_path[i:j] = reversed(new_path[i:j])
+    Tmin = 1e-8  # порог завершения
 
-        if not is_valid_path(new_path):
-            T *= alpha
-            continue
+    # 2) основной цикл SA
+    while T > Tmin:
+        i, j = sorted(random.sample(range(len(current_path)), 2))
+        candidate = current_path[:]
+        candidate[i:j] = candidate[i:j][::-1]
+        d = path_cost(candidate)
+        delta = d - current_cost
 
-        new_cost = path_cost(matrix, new_path)
-        delta = new_cost - current_cost
-
-        if delta < 0 or random.random() < acceptance_probability(delta, T, cauchy_modification):
-            current_path = new_path
-            current_cost = new_cost
+        if delta < 0 or math.exp(-delta / T) > random.random():
+            current_path, current_cost = candidate, d
             if current_cost < best_cost:
-                best_path = current_path[:]
                 best_cost = current_cost
+                best_path = current_path[:]
 
-        T *= alpha
+        # 3) охлаждение
+        if cauchy_modification:
+            T = T / (1 + 0.01 * T)
+        else:
+            T *= alpha
 
-    # Завершаем цикл, добавляя начальный город для замыкания цикла
-    return best_path + [best_path[0]], best_cost
+    # 4) приводим к началу с `start`
+    if start in best_path:
+        idx = best_path.index(start)
+        best_path = best_path[idx:] + best_path[:idx]
+
+    return best_path, best_cost
+
 
 def path_cost(matrix, path):
     cost = 0
@@ -307,7 +312,7 @@ class TSPApp(QWidget):
         return np.loadtxt(filepath, dtype=int)
 
     def test_algorithm(self):
-        node_sizes = [6, 10, 15, 30]
+        node_sizes = [6, 10, 15, 30, 100]
         num_runs = 30
         results = []
 
