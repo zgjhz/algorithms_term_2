@@ -69,25 +69,6 @@ def parse_graph_input(graph_text):
             distance_matrix[i - 1][j] = values[j]
 
 def ant_colony_tsp(adj_matrix, elite_ants=False, n_ants=None, n_iterations=100, decay=0.5, alpha=1.0, beta=2.0):
-    """
-    Решение задачи коммивояжёра методом муравьиного алгоритма для направленного графа.
-    Гарантируется посещение всех вершин и возврат в стартовую, либо возвращается пустой путь
-    при невозможности построить тур.
-    
-    Параметры:
-        adj_matrix: квадратная матрица смежности (numpy array или список списков),
-                    диагональные элементы == 0, остальные > 0 (иначе ребро считается отсутствующим).
-        elite_ants: bool – включить модификацию "э��итных муравьёв".
-        n_ants: число муравьёв (по умолчанию = числу вершин).
-        n_iterations: число итераций алгоритма.
-        decay: коэффициент испарения феромонов (0 < decay < 1).
-        alpha: степень влияния феромонов.
-        beta: степень влияния эвристики (1/длины ребра).
-    Возвращает:
-        best_path: список индексов вершин лучшего тура (с возвратом в стартовую),
-                   или [] если тур не найден.
-        best_cost: стоимость тура, или None если тур не найден.
-    """
     adj = np.array(adj_matrix, dtype=float)
     num_nodes = adj.shape[0]
     if n_ants is None:
@@ -286,23 +267,23 @@ class TSPApp(QWidget):
         self.add_graph_button.clicked.connect(self.load_graph)
         self.optimization_checkbox = QCheckBox("Включить модификацию Коши")
 
-        # self.start_node_label = QLabel("Выберите начальный город:")
-        # self.start_node_selector = QComboBox()
+        self.start_node_label = QLabel("Выберите начальный город:")
+        self.start_node_selector = QComboBox()
 
         # Добавляем поля для гиперпараметров
-        self.iteration_label = QLabel("количество итераций:")
-        self.iterations_input = QTextEdit("100")
-        self.iterations_input.setFixedHeight(30)
-
-        self.decay_lable = QLabel("коэффициент затухания:")
-        self.decay_input = QTextEdit("0.99")
+        self.decay_label = QLabel("Темп испарения феромонов:")
+        self.decay_input = QTextEdit("0.5")
         self.decay_input.setFixedHeight(30)
 
-        self.alpha_label = QLabel("alpha:")
+        self.iteration_label = QLabel("Количество итераций:")
+        self.iteration_input = QTextEdit("100")
+        self.iteration_input.setFixedHeight(30)
+
+        self.alpha_label = QLabel("Параметр alpha (влияние феромонов):")
         self.alpha_input = QTextEdit("1.0")
         self.alpha_input.setFixedHeight(30)
 
-        self.beta_label = QLabel("beta:")
+        self.beta_label = QLabel("Параметр beta (влияние эвристики):")
         self.beta_input = QTextEdit("2.0")
         self.beta_input.setFixedHeight(30)
 
@@ -317,14 +298,14 @@ class TSPApp(QWidget):
         layout.addWidget(self.graph_input)
         layout.addWidget(self.draw_graph_button)
         layout.addWidget(self.add_graph_button)
-        # layout.addWidget(self.start_node_label)
-        # layout.addWidget(self.start_node_selector)
+        layout.addWidget(self.start_node_label)
+        layout.addWidget(self.start_node_selector)
         layout.addWidget(self.optimization_checkbox)
 
-        layout.addWidget(self.iteration_label)
-        layout.addWidget(self.iterations_input)
-        layout.addWidget(self.decay_lable)
+        layout.addWidget(self.decay_label)
         layout.addWidget(self.decay_input)
+        layout.addWidget(self.iteration_label)
+        layout.addWidget(self.iteration_input)
         layout.addWidget(self.alpha_label)
         layout.addWidget(self.alpha_input)
         layout.addWidget(self.beta_label)
@@ -342,8 +323,8 @@ class TSPApp(QWidget):
         parse_graph_input(graph_text)
         if hasattr(self, 'graph_editor') and self.graph_editor.nodes:
             cities, distance_matrix = self.graph_editor.get_graph_data()
-        # self.start_node_selector.clear()
-        # self.start_node_selector.addItems(cities)
+        self.start_node_selector.clear()
+        self.start_node_selector.addItems(cities)
     
     def open_graph_editor(self):
         self.graph_editor = GraphEditor(self)
@@ -388,13 +369,20 @@ class TSPApp(QWidget):
     
     def solve_tsp(self):
         use_optimization = self.optimization_checkbox.isChecked()
+        start_index = self.start_node_selector.currentIndex()
 
-        iterations = int(self.iterations_input.toPlainText())
         decay = float(self.decay_input.toPlainText())
-        aplpha = float(self.alpha_input.toPlainText())
-        beta = float(self.beta_input.toPlainText())
+        iterations = float(self.iteration_input.toPlainText())
         # self.test_algorithm()
-        path, path_length = ant_colony_tsp(distance_matrix, elite_ants=use_optimization, n_ants=len(cities), n_iterations=iterations, decay=decay, alpha=aplpha, beta=beta)
+        path, path_length = ant_colony_tsp(
+            distance_matrix, 
+            elite_ants=use_optimization,
+            n_ants=len(cities),
+            n_iterations=int(iterations),
+            decay=decay,
+            alpha=float(self.alpha_input.toPlainText()),
+            beta=float(self.beta_input.toPlainText())
+        )
 
         if path:
             formatted_path = ' → '.join([cities[i] for i in path])
