@@ -352,7 +352,6 @@ class TSPApp(QWidget):
         except ValueError as e:
             self.result_label.setText(f"Ошибка ввода гиперпараметров: {e}")
             return
-        # self.test_algorithm()
         self.test_algorithm()
         # path, path_length = simulated_annealing_tsp(
         #     distance_matrix, 
