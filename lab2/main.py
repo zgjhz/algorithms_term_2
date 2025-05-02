@@ -71,76 +71,101 @@ def parse_graph_input(graph_text):
 import random
 import math
 
-def simulated_annealing_tsp(matrix, start=4, cauchy_modification=False, T=1000.0, alpha=0.99):
+def nearest_neighbor(matrix, start):
+    """
+    Build initial path using the nearest neighbor heuristic.
+    matrix: adjacency matrix where 0 indicates no edge.
+    start: starting node index.
+    Returns a list of nodes (without returning to start).
+    """
     n = len(matrix)
-    # 1) NN-инициализация
-    unvisited = set(range(n))
-    unvisited.remove(start)
+    visited = {start}
     path = [start]
-    cur = start
-    while unvisited:
-        # выбираем ближайшую доступную вершину
-        candidates = [(matrix[cur][v], v) for v in unvisited if matrix[cur][v] > 0]
-        if not candidates:
-            # нет ходов — заканчиваем
-            break
-        _, nxt = min(candidates, key=lambda x: x[0])
-        path.append(nxt)
-        unvisited.remove(nxt)
-        cur = nxt
+    current = start
 
-    # вспомогательная функция для расчёта стоимости цикла
-    def path_cost(p):
-        total = 0.0
-        for i in range(len(p)):
-            j = (i + 1) % len(p)
-            w = matrix[p[i]][p[j]]
-            if w <= 0:
-                return float('inf')
-            total += w
-        return total
+    while len(visited) < n:
+        next_node = None
+        min_w = float('inf')
+        for j in range(n):
+            w = matrix[current][j]
+            if w and j not in visited and w < min_w:
+                min_w = w
+                next_node = j
+        if next_node is None:
+            break  # no further moves
+        path.append(next_node)
+        visited.add(next_node)
+        current = next_node
 
-    best_path = path[:]
-    best_cost = path_cost(best_path)
-    current_path = best_path[:]
-    current_cost = best_cost
+    return path
 
-    Tmin = 1e-8  # порог завершения
+def path_cost(matrix, path, start):
+    """
+    Compute total cost of a cycle defined by `path` returning to `start`.
+    Returns float('inf') if any required edge is missing.
+    """
+    cost = 0
+    # cost along the path
+    for u, v in zip(path, path[1:]):
+        w = matrix[u][v]
+        if w == 0:
+            return float('inf')
+        cost += w
+    # return to start
+    w_back = matrix[path[-1]][start]
+    if w_back == 0:
+        return float('inf')
+    cost += w_back
+    return cost
 
-    # 2) основной цикл SA
-    while T > Tmin:
-        i, j = sorted(random.sample(range(len(current_path)), 2))
-        candidate = current_path[:]
-        candidate[i:j] = candidate[i:j][::-1]
-        d = path_cost(candidate)
-        delta = d - current_cost
+def simulated_annealing_tsp(matrix, start=4, cauchy_modification=False, T=1000.0, alpha=0.99):
+    """
+    Solve TSP on a directed weighted graph (0 means no edge) using simulated annealing.
+    
+    Parameters:
+        matrix (list of lists or 2D array): adjacency matrix
+        start (int): index of starting node
+        cauchy_modification (bool): if True, use Cauchy cooling schedule T = T/(1+0.01*T);
+                                     otherwise use geometric schedule T *= alpha
+        T (float): initial temperature
+        alpha (float): cooling rate for geometric schedule
+    
+    Returns:
+        best_cycle (list): sequence of nodes including return to start
+        best_cost (float): total cost of the best cycle
+    """
+    # Initial solution via nearest neighbor
+    current_path = nearest_neighbor(matrix, start)
+    current_cost = path_cost(matrix, current_path, start)
+    best_path = current_path.copy()
+    best_cost = current_cost
 
+    # Main loop: cool until temperature is very low
+    while T > 1e-3 and len(current_path) > 1:
+        # Generate a neighbor by reversing a random subsequence (excluding the first node)
+        i, j = sorted(random.sample(range(1, len(current_path)), 2))
+        new_path = current_path.copy()
+        new_path[i:j] = list(reversed(new_path[i:j]))
+        
+        new_cost = path_cost(matrix, new_path, start)
+        delta = new_cost - current_cost
+        
+        # Accept new solution if better, or with probability exp(-delta/T)
         if delta < 0 or math.exp(-delta / T) > random.random():
-            current_path, current_cost = candidate, d
+            current_path, current_cost = new_path, new_cost
             if current_cost < best_cost:
                 best_cost = current_cost
-                best_path = current_path[:]
-
-        # 3) охлаждение
+                best_path = current_path.copy()
+        
+        # Update temperature
         if cauchy_modification:
             T = T / (1 + 0.01 * T)
         else:
             T *= alpha
 
-    # 4) приводим к началу с `start`
-    if start in best_path:
-        idx = best_path.index(start)
-        best_path = best_path[idx:] + best_path[:idx]
-
-    return best_path, best_cost
-
-
-def path_cost(matrix, path):
-    cost = 0
-    for i in range(len(path) - 1):
-        cost += matrix[path[i]][path[i+1]]
-    cost += matrix[path[-1]][path[0]]  # замыкаем в начало
-    return cost
+    # Build full cycle by returning to start
+    best_cycle = best_path + [start]
+    return best_cycle, best_cost
 
 def acceptance_probability(delta, T, cauchy_modification):
     if cauchy_modification:
@@ -313,7 +338,7 @@ class TSPApp(QWidget):
 
     def test_algorithm(self):
         node_sizes = [6, 10, 15, 30, 100]
-        num_runs = 30
+        num_runs = 5
         results = []
 
         for n in node_sizes:

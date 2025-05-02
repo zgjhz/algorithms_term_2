@@ -68,14 +68,15 @@ def parse_graph_input(graph_text):
         for j in range(n):
             distance_matrix[i - 1][j] = values[j]
 
-def ant_colony_tsp(adj_matrix, elite_ants=False, n_ants=None, n_iterations=100, decay=0.5, alpha=1.0, beta=2.0):
+def ant_colony_tsp(adj_matrix, elite_ants=False, n_ants=None, n_iterations=50, decay=0.5, alpha=1.0, beta=2.0):
     adj = np.array(adj_matrix, dtype=float)
     num_nodes = adj.shape[0]
     if n_ants is None:
         n_ants = num_nodes
 
     pheromone = np.ones((num_nodes, num_nodes))
-    heuristic = np.where(adj > 0, 1.0 / adj, 0.0)
+    eps = 1e-6
+    heuristic = np.where(adj > 0, 1.0 / (adj + eps), 0.0)
 
     best_cost = float('inf')
     best_path = None
@@ -265,7 +266,7 @@ class TSPApp(QWidget):
         self.draw_graph_button.clicked.connect(self.open_graph_editor)
         self.add_graph_button = QPushButton("Добавить граф")
         self.add_graph_button.clicked.connect(self.load_graph)
-        self.optimization_checkbox = QCheckBox("Включить модификацию Коши")
+        self.optimization_checkbox = QCheckBox("Включить модификацию")
 
         self.start_node_label = QLabel("Выберите начальный город:")
         self.start_node_selector = QComboBox()
@@ -335,7 +336,7 @@ class TSPApp(QWidget):
 
     def test_algorithm(self):
         node_sizes = [6, 10, 15, 30]
-        num_runs = 30
+        num_runs = 2
         results = []
 
         for n in node_sizes:
@@ -373,26 +374,26 @@ class TSPApp(QWidget):
 
         decay = float(self.decay_input.toPlainText())
         iterations = float(self.iteration_input.toPlainText())
-        # self.test_algorithm()
-        path, path_length = ant_colony_tsp(
-            distance_matrix, 
-            elite_ants=use_optimization,
-            n_ants=len(cities),
-            n_iterations=int(iterations),
-            decay=decay,
-            alpha=float(self.alpha_input.toPlainText()),
-            beta=float(self.beta_input.toPlainText())
-        )
+        self.test_algorithm()
+        # path, path_length = ant_colony_tsp(
+        #     distance_matrix, 
+        #     elite_ants=use_optimization,
+        #     n_ants=len(cities),
+        #     n_iterations=int(iterations),
+        #     decay=decay,
+        #     alpha=float(self.alpha_input.toPlainText()),
+        #     beta=float(self.beta_input.toPlainText())
+        # )
 
-        if path:
-            formatted_path = ' → '.join([cities[i] for i in path])
-            self.result_label.setText(f"Оптимальный путь: {formatted_path}")
-            self.path_length_label.setText(f"Длина пути: {path_length}")
-            draw_graph(path)
-        else:
-            self.result_label.setText("Невозможно построить цикл, возвращающийся в начальный город.")
-            self.path_label.setText("")
-            self.path_length_label.setText("")
+        # if path:
+        #     formatted_path = ' → '.join([cities[i] for i in path])
+        #     self.result_label.setText(f"Оптимальный путь: {formatted_path}")
+        #     self.path_length_label.setText(f"Длина пути: {path_length}")
+        #     draw_graph(path)
+        # else:
+        #     self.result_label.setText("Невозможно построить цикл, возвращающийся в начальный город.")
+        #     self.path_label.setText("")
+        #     self.path_length_label.setText("")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

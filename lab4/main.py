@@ -1,16 +1,17 @@
+import sys
+import os
 import pandas as pd
 import numpy as np
 
-# === 1) Введение пропусков ===
+from PyQt5.QtWidgets import (
+    QApplication, QWidget, QVBoxLayout, QHBoxLayout,
+    QLabel, QComboBox, QSpinBox, QPushButton,
+    QMessageBox, QTableWidget, QTableWidgetItem
+)
 
-def introduce_missing_df(
-    df: pd.DataFrame,
-    pct: float,
-    seed: int = 42
-) -> pd.DataFrame:
-    """
-    Случайно превращает pct% значений в каждом столбце df в NaN.
-    """
+# === здесь ваши функции из исходника ===
+
+def introduce_missing_df(df: pd.DataFrame, pct: float, seed: int = 42) -> pd.DataFrame:
     rng = np.random.default_rng(seed)
     df_miss = df.copy()
     for col in df_miss.columns:
@@ -18,43 +19,29 @@ def introduce_missing_df(
         df_miss.loc[mask, col] = np.nan
     return df_miss
 
-# === 2) Улучшенный Stratified Hot-Deck ===
-
 def impute_hot_deck_strat(df: pd.DataFrame, seed: int = 42) -> pd.DataFrame:
-    """
-    Stratified Hot-deck по «логическим» группам:
-     – для «Цена приёма (руб)» сначала по (Врач, Симптомы), затем по Врач, затем глобально
-     – для визит-полей по Врач
-     – для identity-полей (ФИО, Паспорт, СНИЛС) по Страна
-     – для остальных — глобально
-    """
     rng = np.random.default_rng(seed)
     df_out = df.copy()
-
-    # список индексов, где было NaN в цене
+    # обработка цены
     price_missing = df_out.index[df_out['Цена приёма (руб)'].isna()]
-
-    # сначала заполним цену отдельно
     for i in price_missing:
         doc = df_out.at[i, 'Врач']
         sym = df_out.at[i, 'Симптомы']
-        # 1) попытка (Врач, Симптомы)
         mask = (
             (df_out['Врач'] == doc) &
             (df_out['Симптомы'] == sym) &
             df_out['Цена приёма (руб)'].notna()
         )
         pool = df_out.loc[mask, 'Цена приёма (руб)'].values
-        # 2) fallback: по Врачу
         if len(pool) == 0:
-            mask2 = (df_out['Врач'] == doc) & df_out['Цена приёма (руб)'].notna()
-            pool = df_out.loc[mask2, 'Цена приёма (руб)'].values
-        # 3) fallback: глобально
+            pool = df_out.loc[
+                (df_out['Врач'] == doc) & df_out['Цена приёма (руб)'].notna(),
+                'Цена приёма (руб)'
+            ].values
         if len(pool) == 0:
             pool = df_out['Цена приёма (руб)'].dropna().values
         df_out.at[i, 'Цена приёма (руб)'] = rng.choice(pool)
 
-    # mapping других столбцов на группу
     stratify = {
         'Симптомы':                'Врач',
         'Врач':                    None,
@@ -62,19 +49,16 @@ def impute_hot_deck_strat(df: pd.DataFrame, seed: int = 42) -> pd.DataFrame:
         'Анализы':                 'Врач',
         'Дата получения анализов': 'Врач',
         'ФИО':                     'Страна',
-        'Паспортые данные':        'Страна',
+        'Паспортые_данные':        'Страна',
         'СНИЛС':                   'Страна',
-        # остальные — None (глобально)
     }
-
     for col in df_out.columns:
         if col == 'Цена приёма (руб)':
-            continue  # уже обработали
+            continue
         miss_idx = df_out.index[df_out[col].isna()]
-        if len(miss_idx) == 0:
+        if miss_idx.empty:
             continue
         group_col = stratify.get(col, None)
-
         if group_col:
             for i in miss_idx:
                 key = df_out.at[i, group_col]
@@ -93,29 +77,34 @@ def impute_hot_deck_strat(df: pd.DataFrame, seed: int = 42) -> pd.DataFrame:
 
     return df_out
 
-# === 3) LOCF по пациенту ===
-
-def impute_locf_by_patient(df: pd.DataFrame) -> pd.DataFrame:
+def impute_spline(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Last-Observation-Carried-Forward и Backfill внутри каждой группы 'ФИО',
-    чтобы не «тянуть» данные одного пациента к другому.
+    Восстанавливает пропуски в числовых столбцах
+    сплайн-интерполяцией 3-го порядка по индексу.
     """
     df_out = df.copy()
-    # временная колонка для сортировки
+    # Все числовые поля
+    numeric = df_out.select_dtypes(include='number').columns
+    # Применяем interpolate с методом 'spline'
+    df_out[numeric] = (
+        df_out[numeric]
+        .interpolate(method='spline', order=3, limit_direction='both')
+    )
+    return df_out
+
+def impute_locf_by_patient(df: pd.DataFrame) -> pd.DataFrame:
+    df_out = df.copy()
     df_out['__dt_visit'] = pd.to_datetime(
         df_out['Дата посещения врача'],
         format="%Y-%m-%dT%H:%M:%S%z",
         errors='coerce'
     )
     df_out.sort_values(['ФИО', '__dt_visit'], inplace=True)
-
     df_out = (
         df_out
         .groupby('ФИО', group_keys=False)
-        .apply(lambda g: g.ffill().bfill())
+        .apply(lambda g: g.ffill())
     )
-
-    # вернуть дату визита в строковый формат
     df_out['Дата посещения врача'] = (
         df_out['__dt_visit']
         .dt.strftime("%Y-%m-%dT%H:%M:%S+03:00")
@@ -123,125 +112,167 @@ def impute_locf_by_patient(df: pd.DataFrame) -> pd.DataFrame:
     df_out.drop(columns='__dt_visit', inplace=True)
     return df_out
 
-# === 4) Оценка для числовых и категориальных ===
-
 def evaluate_imputation(
     df_orig: pd.DataFrame,
     df_missing: pd.DataFrame,
     df_imputed: pd.DataFrame
 ) -> pd.DataFrame:
-    """
-    Для каждого столбца:
-      – если числовой: sum_rel_err = Σ|ai - âi|/|ai|
-      – иначе:        error_rate = (# mismatches)/(# recovered)
-    Использует только те индексы, где пропуск восстановлен (т. е. присутствует в df_imputed).
-    Возвращает DataFrame с колонками: column, sum_rel_err, error_rate.
-    """
     records = []
     numeric_cols = df_orig.select_dtypes(include='number').columns
-
     for col in df_orig.columns:
-        # все индексы, где в df_missing стоит NaN
         miss_idx = df_missing.index[df_missing[col].isna()]
-        if len(miss_idx) == 0:
+        if miss_idx.empty:
             continue
-
-        # оставляем только те индексы, что есть и в df_imputed
         valid_idx = miss_idx.intersection(df_imputed.index)
-        if len(valid_idx) == 0:
-            # ничего не восстановлено для этого столбца
+        if valid_idx.empty:
             continue
-
-        # Истинные и восстановленные значения по этим индексам
         tv = df_orig.loc[valid_idx, col]
         pv = df_imputed.loc[valid_idx, col]
-
         if col in numeric_cols:
-            # Σ |ai - âi| / |ai|
-            sum_rel = (tv.subtract(pv).abs()
-                            .divide(tv.abs())
-                            .sum())
+            sum_rel = (tv.subtract(pv).abs().divide(tv.abs()).sum())
             records.append({
                 'column':      col,
                 'sum_rel_err': sum_rel,
                 'error_rate':  np.nan
             })
         else:
-            # доля mismatches среди тех, что реально восстановлены
-            tv_s = tv.astype(str)
-            pv_s = pv.astype(str)
-            mismatches = (tv_s != pv_s).sum()
+            mismatches = (tv.astype(str) != pv.astype(str)).sum()
             rate = mismatches / len(valid_idx)
             records.append({
                 'column':      col,
                 'sum_rel_err': np.nan,
                 'error_rate':  rate
             })
-
-    # Общий TOTAL по числовым sum_rel_err
     total = sum(r['sum_rel_err'] for r in records if pd.notna(r['sum_rel_err']))
     records.append({
         'column':      'TOTAL',
         'sum_rel_err': total,
         'error_rate':  np.nan
     })
-
     return pd.DataFrame(records)
 
-# === 5) Интеграция в main ===
+# === GUI ===
 
-imputers = {
-    'hot_deck': impute_hot_deck_strat,
-    'locf':     impute_locf_by_patient
-}
+class ImputationApp(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Импутация данных — Лабораторная работа 4")
+        self.resize(900, 600)
 
-def main(csv_files, percentages=[3,5,10,20,30], seed=42):
-    import os
-    os.makedirs("lab4/imputed_variants", exist_ok=True)
-    all_records = []
+        # --- виджеты ---
+        lbl_file = QLabel("Выберите датасет:")
+        self.csv_combo = QComboBox()
+        self.csv_combo.addItems(["small.csv", "medium.csv", "large.csv"])
 
-    for path in csv_files:
-        df_orig = pd.read_csv(path, encoding='utf-8-sig')
-        name = os.path.splitext(os.path.basename(path))[0]
+        lbl_pct = QLabel("Процент пропусков:")
+        self.pct_spin = QSpinBox()
+        self.pct_spin.setRange(0, 100)
+        self.pct_spin.setValue(10)
+        self.pct_spin.setSuffix(" %")
 
-        for pct in percentages:
-            df_miss = introduce_missing_df(df_orig, pct, seed)
+        self.degrade_btn = QPushButton("Испортить датасет")
+        self.impute_btn  = QPushButton("Восстановить датасет")
 
-            for method, fn in imputers.items():
-                # 1) применяем метод
-                df_imp = fn(df_miss)
+        # Табличка для вывода результата
+        self.table = QTableWidget()
+        self.table.setEditTriggers(QTableWidget.NoEditTriggers)
 
-                # 2) сохраняем восстановленный датасет
-                out_path = f"lab4/imputed_variants/{name}_missing_{pct}_{method}.csv"
-                df_imp.to_csv(out_path, index=False, encoding='utf-8-sig')
+        # --- раскладка ---
+        top_layout = QHBoxLayout()
+        top_layout.addWidget(lbl_file)
+        top_layout.addWidget(self.csv_combo)
+        top_layout.addSpacing(20)
+        top_layout.addWidget(lbl_pct)
+        top_layout.addWidget(self.pct_spin)
+        top_layout.addStretch()
+        top_layout.addWidget(self.degrade_btn)
+        top_layout.addWidget(self.impute_btn)
 
-                # 3) сразу перезагружаем, чтобы индексы были RangeIndex
-                df_imp = pd.read_csv(out_path, encoding='utf-8-sig')
+        main_layout = QVBoxLayout(self)
+        main_layout.addLayout(top_layout)
+        main_layout.addWidget(self.table)
 
-                # 4) оцениваем
-                report = evaluate_imputation(df_orig, df_miss, df_imp)
-                for _, row in report.iterrows():
-                    all_records.append({
-                        'dataset':     name,
-                        'pct_missing': pct,
-                        'method':      method,
-                        'column':      row['column'],
-                        'sum_rel_err': row['sum_rel_err'],
-                        'error_rate':  row['error_rate']
-                    })
+        # --- сигналы ---
+        self.degrade_btn.clicked.connect(self.degrade_dataset)
+        self.impute_btn.clicked.connect(self.impute_dataset)
 
-    results = pd.DataFrame(all_records)
-    pivot = results.pivot_table(
-        index=['dataset','pct_missing','column'],
-        columns='method',
-        values=['sum_rel_err','error_rate']
-    )
-    print(pivot.round(3))
-    return results
+        # в памяти
+        self.df_orig = None
+        self.df_miss = None
 
+    def degrade_dataset(self):
+        fname = f"lab4/{self.csv_combo.currentText()}"
+        if not os.path.exists(fname):
+            QMessageBox.warning(self, "Ошибка", f"Не найден файл {fname}")
+            return
+        df = pd.read_csv(fname, encoding='utf-8-sig')
+        pct = self.pct_spin.value()
+        df_miss = introduce_missing_df(df, pct, seed=42)
+        self.df_orig = df
+        self.df_miss = df_miss
 
-# === Пример запуска ===
+        # Очистим таблицу
+        self.table.clear()
+        self.table.setRowCount(0)
+        self.table.setColumnCount(2)
+        self.table.setHorizontalHeaderLabels(["Столбец", "Пропущено ячеек"])
+
+        na_counts = df_miss.isna().sum()
+        # заполняем
+        for i, (col, cnt) in enumerate(na_counts.items()):
+            self.table.insertRow(i)
+            self.table.setItem(i, 0, QTableWidgetItem(col))
+            self.table.setItem(i, 1, QTableWidgetItem(str(int(cnt))))
+
+    def impute_dataset(self):
+        if self.df_orig is None or self.df_miss is None:
+            QMessageBox.warning(self, "Ошибка", "Сначала испорьте датасет")
+            return
+
+        # Раньше было 2 метода — добавляем третий 'spline'
+        methods = {
+            'hot_deck': impute_hot_deck_strat,
+            'locf':     impute_locf_by_patient,
+            'spline':   impute_spline
+        }
+
+        reports = []
+        for name, fn in methods.items():
+            df_imp = fn(self.df_miss.copy())
+            rep = evaluate_imputation(self.df_orig, self.df_miss, df_imp)
+            rep['method'] = name
+            reports.append(rep)
+
+        df_all = pd.concat(reports, ignore_index=True)
+        pivot = df_all.pivot_table(
+            index='column',
+            columns='method',
+            values=['sum_rel_err','error_rate']
+        ).round(3)
+
+        # Флэттеним MultiIndex колонок: ('sum_rel_err','hot_deck') → 'sum_rel_err_hot_deck'
+        pivot.columns = [
+            f"{metric}_{method}"
+            for metric, method in pivot.columns
+        ]
+        pivot.reset_index(inplace=True)
+
+        # заполняем QTableWidget
+        self.table.clear()
+        self.table.setRowCount(len(pivot))
+        self.table.setColumnCount(len(pivot.columns))
+        self.table.setHorizontalHeaderLabels(pivot.columns.tolist())
+
+        for i, row in pivot.iterrows():
+            for j, value in enumerate(row):
+                self.table.setItem(
+                    i, j,
+                    QTableWidgetItem("" if pd.isna(value) else str(value))
+                )
+        self.table.resizeColumnsToContents()
+
 if __name__ == "__main__":
-    csv_files = ["lab4/medium.csv"]
-    all_results = main(csv_files)
-    all_results.to_csv("lab4/imputation_quality_summary.csv", index=False, encoding='utf-8-sig')
+    app = QApplication(sys.argv)
+    win = ImputationApp()
+    win.show()
+    sys.exit(app.exec_())
