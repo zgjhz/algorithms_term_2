@@ -1,0 +1,820 @@
+Unnamed: 0,Среднее,Медиана,Мода,file
+ФИО,,,Алексеева Маргарита Валерьевна,large_10_hot_deck_stats.csv
+Страна,,,Беларусь,large_10_hot_deck_stats.csv
+Паспортые данные,,,6036 268715,large_10_hot_deck_stats.csv
+СНИЛС,,,107-447-799 24,large_10_hot_deck_stats.csv
+Номер карты,,,1152 5549 9360 5605,large_10_hot_deck_stats.csv
+Банк,,,Сбербанк,large_10_hot_deck_stats.csv
+Платежная система,,,Visa,large_10_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,large_10_hot_deck_stats.csv
+Врач,,,Флеболог,large_10_hot_deck_stats.csv
+Дата посещения врача,,,2024-06-08T10:12:05+03:00,large_10_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,large_10_hot_deck_stats.csv
+Дата получения анализов,,,2023-07-11T11:45:00+03:00,large_10_hot_deck_stats.csv
+Цена приёма (руб),6999.683250303848,6988.0,6456.0,large_10_hot_deck_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_10_locf_stats.csv
+Страна,,,Беларусь,large_10_locf_stats.csv
+Паспортые данные,,,N 4084321,large_10_locf_stats.csv
+СНИЛС,,,275-779-262 87,large_10_locf_stats.csv
+Номер карты,,,7804 9973 3731 6577,large_10_locf_stats.csv
+Банк,,,Сбербанк,large_10_locf_stats.csv
+Платежная система,,,Visa,large_10_locf_stats.csv
+Симптомы,,,Боль в суставах,large_10_locf_stats.csv
+Врач,,,Трансплантолог,large_10_locf_stats.csv
+Дата посещения врача,,,2023-07-03T08:54:34+03:00,large_10_locf_stats.csv
+Анализы,,,Общий анализ крови,large_10_locf_stats.csv
+Дата получения анализов,,,2023-05-16T14:20:47+03:00,large_10_locf_stats.csv
+Цена приёма (руб),7001.197153847182,6993.0,7149.0,large_10_locf_stats.csv
+ФИО,,,Абрамова Жанна Яковлевна,large_10_missing_stats.csv
+Страна,,,Беларусь,large_10_missing_stats.csv
+Паспортые данные,,,N 3921758,large_10_missing_stats.csv
+СНИЛС,,,100-397-525 65,large_10_missing_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_10_missing_stats.csv
+Банк,,,Сбербанк,large_10_missing_stats.csv
+Платежная система,,,Visa,large_10_missing_stats.csv
+Симптомы,,,Боль в суставах,large_10_missing_stats.csv
+Врач,,,Трансплантолог,large_10_missing_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_10_missing_stats.csv
+Анализы,,,Общий анализ крови,large_10_missing_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_10_missing_stats.csv
+Цена приёма (руб),7001.245777553504,6990.0,6456.0,large_10_missing_stats.csv
+ФИО,,,Абрамова Жанна Яковлевна,large_10_spline_stats.csv
+Страна,,,Беларусь,large_10_spline_stats.csv
+Паспортые данные,,,N 3921758,large_10_spline_stats.csv
+СНИЛС,,,100-397-525 65,large_10_spline_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_10_spline_stats.csv
+Банк,,,Сбербанк,large_10_spline_stats.csv
+Платежная система,,,Visa,large_10_spline_stats.csv
+Симптомы,,,Боль в суставах,large_10_spline_stats.csv
+Врач,,,Трансплантолог,large_10_spline_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_10_spline_stats.csv
+Анализы,,,Общий анализ крови,large_10_spline_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_10_spline_stats.csv
+Цена приёма (руб),7002.622189822574,6994.0,6456.0,large_10_spline_stats.csv
+ФИО,,,Алексеев Владислав Матвеевич,large_20_hot_deck_stats.csv
+Страна,,,Беларусь,large_20_hot_deck_stats.csv
+Паспортые данные,,,LU 0737412,large_20_hot_deck_stats.csv
+СНИЛС,,,656-401-197 47,large_20_hot_deck_stats.csv
+Номер карты,,,9639 2077 2484 7571,large_20_hot_deck_stats.csv
+Банк,,,Сбербанк,large_20_hot_deck_stats.csv
+Платежная система,,,Visa,large_20_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,large_20_hot_deck_stats.csv
+Врач,,,Трансплантолог,large_20_hot_deck_stats.csv
+Дата посещения врача,,,2024-09-18T10:32:20+03:00,large_20_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,large_20_hot_deck_stats.csv
+Дата получения анализов,,,2024-02-28T12:33:03+03:00,large_20_hot_deck_stats.csv
+Цена приёма (руб),7006.864497215284,7002.0,6456.0,large_20_hot_deck_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_20_locf_stats.csv
+Страна,,,Беларусь,large_20_locf_stats.csv
+Паспортые данные,,,N 4084321,large_20_locf_stats.csv
+СНИЛС,,,987-701-112 33,large_20_locf_stats.csv
+Номер карты,,,7804 9973 3731 6577,large_20_locf_stats.csv
+Банк,,,Сбербанк,large_20_locf_stats.csv
+Платежная система,,,Visa,large_20_locf_stats.csv
+Симптомы,,,Боль в суставах,large_20_locf_stats.csv
+Врач,,,Трансплантолог,large_20_locf_stats.csv
+Дата посещения врача,,,2023-10-07T20:19:16+03:00,large_20_locf_stats.csv
+Анализы,,,Общий анализ крови,large_20_locf_stats.csv
+Дата получения анализов,,,2025-04-12T10:21:43+03:00,large_20_locf_stats.csv
+Цена приёма (руб),6998.725789002711,6983.0,7149.0,large_20_locf_stats.csv
+ФИО,,,Абрамова Жанна Яковлевна,large_20_missing_stats.csv
+Страна,,,Беларусь,large_20_missing_stats.csv
+Паспортые данные,,,N 4084321,large_20_missing_stats.csv
+СНИЛС,,,100-397-525 65,large_20_missing_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_20_missing_stats.csv
+Банк,,,Сбербанк,large_20_missing_stats.csv
+Платежная система,,,Visa,large_20_missing_stats.csv
+Симптомы,,,Боль в суставах,large_20_missing_stats.csv
+Врач,,,Трансплантолог,large_20_missing_stats.csv
+Дата посещения врача,,,2023-05-09T10:51:21+03:00,large_20_missing_stats.csv
+Анализы,,,Общий анализ крови,large_20_missing_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_20_missing_stats.csv
+Цена приёма (руб),7003.9857462736445,6992.0,6456.0,large_20_missing_stats.csv
+ФИО,,,Абрамова Жанна Яковлевна,large_20_spline_stats.csv
+Страна,,,Беларусь,large_20_spline_stats.csv
+Паспортые данные,,,N 4084321,large_20_spline_stats.csv
+СНИЛС,,,100-397-525 65,large_20_spline_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_20_spline_stats.csv
+Банк,,,Сбербанк,large_20_spline_stats.csv
+Платежная система,,,Visa,large_20_spline_stats.csv
+Симптомы,,,Боль в суставах,large_20_spline_stats.csv
+Врач,,,Трансплантолог,large_20_spline_stats.csv
+Дата посещения врача,,,2023-05-09T10:51:21+03:00,large_20_spline_stats.csv
+Анализы,,,Общий анализ крови,large_20_spline_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_20_spline_stats.csv
+Цена приёма (руб),6996.4757887765545,6990.0,6456.0,large_20_spline_stats.csv
+ФИО,,,Климентов Вадим Вадимович,large_30_hot_deck_stats.csv
+Страна,,,Беларусь,large_30_hot_deck_stats.csv
+Паспортые данные,,,5789 831797,large_30_hot_deck_stats.csv
+СНИЛС,,,517-312-358 89,large_30_hot_deck_stats.csv
+Номер карты,,,1890 3454 1759 6648,large_30_hot_deck_stats.csv
+Банк,,,Сбербанк,large_30_hot_deck_stats.csv
+Платежная система,,,Visa,large_30_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,large_30_hot_deck_stats.csv
+Врач,,,Трансплантолог,large_30_hot_deck_stats.csv
+Дата посещения врача,,,2023-12-13T09:05:27+03:00,large_30_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,large_30_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-28T19:17:13+03:00,large_30_hot_deck_stats.csv
+Цена приёма (руб),7009.983084690075,6999.0,4925.0,large_30_hot_deck_stats.csv
+ФИО,,,Мартынова Виктория Архиповна,large_30_locf_stats.csv
+Страна,,,Беларусь,large_30_locf_stats.csv
+Паспортые данные,,,N 4084321,large_30_locf_stats.csv
+СНИЛС,,,735-442-375 48,large_30_locf_stats.csv
+Номер карты,,,5580 7640 3095 1436,large_30_locf_stats.csv
+Банк,,,Сбербанк,large_30_locf_stats.csv
+Платежная система,,,Visa,large_30_locf_stats.csv
+Симптомы,,,Боль в суставах,large_30_locf_stats.csv
+Врач,,,Ревматолог,large_30_locf_stats.csv
+Дата посещения врача,,,2023-11-01T20:16:42+03:00,large_30_locf_stats.csv
+Анализы,,,Общий анализ крови,large_30_locf_stats.csv
+Дата получения анализов,,,2024-09-01T10:07:52+03:00,large_30_locf_stats.csv
+Цена приёма (руб),7001.217434856357,6982.0,11285.0,large_30_locf_stats.csv
+ФИО,,,Борисова Есения Денисовна,large_30_missing_stats.csv
+Страна,,,Беларусь,large_30_missing_stats.csv
+Паспортые данные,,,N 4084321,large_30_missing_stats.csv
+СНИЛС,,,100-397-525 65,large_30_missing_stats.csv
+Номер карты,,,1001 2016 1372 1989,large_30_missing_stats.csv
+Банк,,,Сбербанк,large_30_missing_stats.csv
+Платежная система,,,Visa,large_30_missing_stats.csv
+Симптомы,,,Боль в суставах,large_30_missing_stats.csv
+Врач,,,Трансплантолог,large_30_missing_stats.csv
+Дата посещения врача,,,2023-05-15T14:27:25+03:00,large_30_missing_stats.csv
+Анализы,,,Общий анализ крови,large_30_missing_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_30_missing_stats.csv
+Цена приёма (руб),7005.030704228045,6989.0,7149.0,large_30_missing_stats.csv
+ФИО,,,Борисова Есения Денисовна,large_30_spline_stats.csv
+Страна,,,Беларусь,large_30_spline_stats.csv
+Паспортые данные,,,N 4084321,large_30_spline_stats.csv
+СНИЛС,,,100-397-525 65,large_30_spline_stats.csv
+Номер карты,,,1001 2016 1372 1989,large_30_spline_stats.csv
+Банк,,,Сбербанк,large_30_spline_stats.csv
+Платежная система,,,Visa,large_30_spline_stats.csv
+Симптомы,,,Боль в суставах,large_30_spline_stats.csv
+Врач,,,Трансплантолог,large_30_spline_stats.csv
+Дата посещения врача,,,2023-05-15T14:27:25+03:00,large_30_spline_stats.csv
+Анализы,,,Общий анализ крови,large_30_spline_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_30_spline_stats.csv
+Цена приёма (руб),6994.226712179721,6981.0,7149.0,large_30_spline_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_3_hot_deck_stats.csv
+Страна,,,Беларусь,large_3_hot_deck_stats.csv
+Паспортые данные,,,N 4084321,large_3_hot_deck_stats.csv
+СНИЛС,,,557-918-139 92,large_3_hot_deck_stats.csv
+Номер карты,,,1161 2273 2689 2477,large_3_hot_deck_stats.csv
+Банк,,,Сбербанк,large_3_hot_deck_stats.csv
+Платежная система,,,Visa,large_3_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,large_3_hot_deck_stats.csv
+Врач,,,Гастроэнтеролог,large_3_hot_deck_stats.csv
+Дата посещения врача,,,2025-02-02T14:10:24+03:00,large_3_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,large_3_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-17T14:51:33+03:00,large_3_hot_deck_stats.csv
+Цена приёма (руб),7004.550812709522,6995.0,5739.0,large_3_hot_deck_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_3_locf_stats.csv
+Страна,,,Беларусь,large_3_locf_stats.csv
+Паспортые данные,,,N 4084321,large_3_locf_stats.csv
+СНИЛС,,,257-481-185 92,large_3_locf_stats.csv
+Номер карты,,,2306 5387 9494 4424,large_3_locf_stats.csv
+Банк,,,Сбербанк,large_3_locf_stats.csv
+Платежная система,,,Visa,large_3_locf_stats.csv
+Симптомы,,,Боль в суставах,large_3_locf_stats.csv
+Врач,,,Трансплантолог,large_3_locf_stats.csv
+Дата посещения врача,,,2023-05-11T13:54:18+03:00,large_3_locf_stats.csv
+Анализы,,,Общий анализ крови,large_3_locf_stats.csv
+Дата получения анализов,,,2023-05-31T16:32:06+03:00,large_3_locf_stats.csv
+Цена приёма (руб),7003.396932138421,6995.0,6456.0,large_3_locf_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_3_missing_stats.csv
+Страна,,,Беларусь,large_3_missing_stats.csv
+Паспортые данные,,,N 4084321,large_3_missing_stats.csv
+СНИЛС,,,100-206-649 63,large_3_missing_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_3_missing_stats.csv
+Банк,,,Сбербанк,large_3_missing_stats.csv
+Платежная система,,,Visa,large_3_missing_stats.csv
+Симптомы,,,Боль в суставах,large_3_missing_stats.csv
+Врач,,,Трансплантолог,large_3_missing_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_3_missing_stats.csv
+Анализы,,,Общий анализ крови,large_3_missing_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_3_missing_stats.csv
+Цена приёма (руб),7003.436729159785,6994.0,6456.0,large_3_missing_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_3_spline_stats.csv
+Страна,,,Беларусь,large_3_spline_stats.csv
+Паспортые данные,,,N 4084321,large_3_spline_stats.csv
+СНИЛС,,,100-206-649 63,large_3_spline_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_3_spline_stats.csv
+Банк,,,Сбербанк,large_3_spline_stats.csv
+Платежная система,,,Visa,large_3_spline_stats.csv
+Симптомы,,,Боль в суставах,large_3_spline_stats.csv
+Врач,,,Трансплантолог,large_3_spline_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_3_spline_stats.csv
+Анализы,,,Общий анализ крови,large_3_spline_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_3_spline_stats.csv
+Цена приёма (руб),7002.411273174343,6994.0,6456.0,large_3_spline_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_5_hot_deck_stats.csv
+Страна,,,Беларусь,large_5_hot_deck_stats.csv
+Паспортые данные,,,7676 726920,large_5_hot_deck_stats.csv
+СНИЛС,,,138-500-893 27,large_5_hot_deck_stats.csv
+Номер карты,,,1941 2371 5987 1458,large_5_hot_deck_stats.csv
+Банк,,,Сбербанк,large_5_hot_deck_stats.csv
+Платежная система,,,Visa,large_5_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,large_5_hot_deck_stats.csv
+Врач,,,Трансплантолог,large_5_hot_deck_stats.csv
+Дата посещения врача,,,2023-09-03T14:57:22+03:00,large_5_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,large_5_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-11T12:15:29+03:00,large_5_hot_deck_stats.csv
+Цена приёма (руб),7002.431270284348,6993.0,6456.0,large_5_hot_deck_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_5_locf_stats.csv
+Страна,,,Беларусь,large_5_locf_stats.csv
+Паспортые данные,,,N 4084321,large_5_locf_stats.csv
+СНИЛС,,,257-481-185 92,large_5_locf_stats.csv
+Номер карты,,,4060 2490 4667 2551,large_5_locf_stats.csv
+Банк,,,Сбербанк,large_5_locf_stats.csv
+Платежная система,,,Visa,large_5_locf_stats.csv
+Симптомы,,,Боль в суставах,large_5_locf_stats.csv
+Врач,,,Трансплантолог,large_5_locf_stats.csv
+Дата посещения врача,,,2024-04-19T21:07:59+03:00,large_5_locf_stats.csv
+Анализы,,,Общий анализ крови,large_5_locf_stats.csv
+Дата получения анализов,,,2024-10-19T14:48:50+03:00,large_5_locf_stats.csv
+Цена приёма (руб),7002.143389472841,6994.0,6456.0,large_5_locf_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_5_missing_stats.csv
+Страна,,,Беларусь,large_5_missing_stats.csv
+Паспортые данные,,,N 3921758,large_5_missing_stats.csv
+СНИЛС,,,100-206-649 63,large_5_missing_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_5_missing_stats.csv
+Банк,,,Сбербанк,large_5_missing_stats.csv
+Платежная система,,,Visa,large_5_missing_stats.csv
+Симптомы,,,Боль в суставах,large_5_missing_stats.csv
+Врач,,,Трансплантолог,large_5_missing_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_5_missing_stats.csv
+Анализы,,,Общий анализ крови,large_5_missing_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_5_missing_stats.csv
+Цена приёма (руб),7002.848329536826,6993.0,6456.0,large_5_missing_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_5_spline_stats.csv
+Страна,,,Беларусь,large_5_spline_stats.csv
+Паспортые данные,,,N 3921758,large_5_spline_stats.csv
+СНИЛС,,,100-206-649 63,large_5_spline_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_5_spline_stats.csv
+Банк,,,Сбербанк,large_5_spline_stats.csv
+Платежная система,,,Visa,large_5_spline_stats.csv
+Симптомы,,,Боль в суставах,large_5_spline_stats.csv
+Врач,,,Трансплантолог,large_5_spline_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_5_spline_stats.csv
+Анализы,,,Общий анализ крови,large_5_spline_stats.csv
+Дата получения анализов,,,2023-05-08T19:04:17+03:00,large_5_spline_stats.csv
+Цена приёма (руб),7001.636420965409,6992.0,6456.0,large_5_spline_stats.csv
+ФИО,,,Князев Вячеслав Семёнович,large_base_stats.csv
+Страна,,,Беларусь,large_base_stats.csv
+Паспортые данные,,,N 4084321,large_base_stats.csv
+СНИЛС,,,100-206-649 63,large_base_stats.csv
+Номер карты,,,1000 7493 9679 3124,large_base_stats.csv
+Банк,,,Сбербанк,large_base_stats.csv
+Платежная система,,,Visa,large_base_stats.csv
+Симптомы,,,Боль в суставах,large_base_stats.csv
+Врач,,,Трансплантолог,large_base_stats.csv
+Дата посещения врача,,,2023-05-05T16:02:02+03:00,large_base_stats.csv
+Анализы,,,Общий анализ крови,large_base_stats.csv
+Дата получения анализов,,,2023-05-08T18:06:39+03:00,large_base_stats.csv
+Цена приёма (руб),7005.113438756294,6995.0,6456,large_base_stats.csv
+ФИО,,,Лебедев Иннокентий Захарович,medium_10_hot_deck_stats.csv
+Страна,,,Беларусь,medium_10_hot_deck_stats.csv
+Паспортые данные,,,2595 664749,medium_10_hot_deck_stats.csv
+СНИЛС,,,549-492-996 29,medium_10_hot_deck_stats.csv
+Номер карты,,,7445 7518 8979 2858,medium_10_hot_deck_stats.csv
+Банк,,,Сбербанк,medium_10_hot_deck_stats.csv
+Платежная система,,,Visa,medium_10_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,medium_10_hot_deck_stats.csv
+Врач,,,Инфекционист,medium_10_hot_deck_stats.csv
+Дата посещения врача,,,2023-11-15T14:32:14+03:00,medium_10_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,medium_10_hot_deck_stats.csv
+Дата получения анализов,,,2023-06-07T16:29:23+03:00,medium_10_hot_deck_stats.csv
+Цена приёма (руб),7004.655394416967,6993.0,8831.0,medium_10_hot_deck_stats.csv
+ФИО,,,Гаврилов Константин Ярославович,medium_10_locf_stats.csv
+Страна,,,Казахстан,medium_10_locf_stats.csv
+Паспортые данные,,,2389 843449,medium_10_locf_stats.csv
+СНИЛС,,,545-111-440 85,medium_10_locf_stats.csv
+Номер карты,,,9582 2665 3594 4750,medium_10_locf_stats.csv
+Банк,,,Сбербанк,medium_10_locf_stats.csv
+Платежная система,,,Visa,medium_10_locf_stats.csv
+Симптомы,,,Боль в суставах,medium_10_locf_stats.csv
+Врач,,,Инфекционист,medium_10_locf_stats.csv
+Дата посещения врача,,,2023-12-19T09:25:36+03:00,medium_10_locf_stats.csv
+Анализы,,,Общий анализ крови,medium_10_locf_stats.csv
+Дата получения анализов,,,2023-10-27T13:10:41+03:00,medium_10_locf_stats.csv
+Цена приёма (руб),7007.6886578925305,7001.0,11302.0,medium_10_locf_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_10_missing_stats.csv
+Страна,,,Казахстан,medium_10_missing_stats.csv
+Паспортые данные,,,1009 856567,medium_10_missing_stats.csv
+СНИЛС,,,100-542-613 80,medium_10_missing_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_10_missing_stats.csv
+Банк,,,Сбербанк,medium_10_missing_stats.csv
+Платежная система,,,Visa,medium_10_missing_stats.csv
+Симптомы,,,Боль в суставах,medium_10_missing_stats.csv
+Врач,,,Инфекционист,medium_10_missing_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_10_missing_stats.csv
+Анализы,,,Общий анализ крови,medium_10_missing_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_10_missing_stats.csv
+Цена приёма (руб),7003.629277034216,6996.0,11302.0,medium_10_missing_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_10_spline_stats.csv
+Страна,,,Казахстан,medium_10_spline_stats.csv
+Паспортые данные,,,1009 856567,medium_10_spline_stats.csv
+СНИЛС,,,100-542-613 80,medium_10_spline_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_10_spline_stats.csv
+Банк,,,Сбербанк,medium_10_spline_stats.csv
+Платежная система,,,Visa,medium_10_spline_stats.csv
+Симптомы,,,Боль в суставах,medium_10_spline_stats.csv
+Врач,,,Инфекционист,medium_10_spline_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_10_spline_stats.csv
+Анализы,,,Общий анализ крови,medium_10_spline_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_10_spline_stats.csv
+Цена приёма (руб),7008.400795213454,7005.0,11302.0,medium_10_spline_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_20_hot_deck_stats.csv
+Страна,,,Казахстан,medium_20_hot_deck_stats.csv
+Паспортые данные,,,8130 227399,medium_20_hot_deck_stats.csv
+СНИЛС,,,487-348-598 91,medium_20_hot_deck_stats.csv
+Номер карты,,,5503 2902 9950 1132,medium_20_hot_deck_stats.csv
+Банк,,,Сбербанк,medium_20_hot_deck_stats.csv
+Платежная система,,,Visa,medium_20_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,medium_20_hot_deck_stats.csv
+Врач,,,Невролог,medium_20_hot_deck_stats.csv
+Дата посещения врача,,,2023-12-03T12:44:03+03:00,medium_20_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,medium_20_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-10T09:42:56+03:00,medium_20_hot_deck_stats.csv
+Цена приёма (руб),7003.590544052309,7003.0,10643.0,medium_20_hot_deck_stats.csv
+ФИО,,,Тихонова Милана Николаевна,medium_20_locf_stats.csv
+Страна,,,Казахстан,medium_20_locf_stats.csv
+Паспортые данные,,,2256 292371,medium_20_locf_stats.csv
+СНИЛС,,,911-479-567 93,medium_20_locf_stats.csv
+Номер карты,,,6257 2622 1041 5015,medium_20_locf_stats.csv
+Банк,,,Сбербанк,medium_20_locf_stats.csv
+Платежная система,,,Visa,medium_20_locf_stats.csv
+Симптомы,,,Боль в суставах,medium_20_locf_stats.csv
+Врач,,,Инфекционист,medium_20_locf_stats.csv
+Дата посещения врача,,,2023-07-26T19:33:48+03:00,medium_20_locf_stats.csv
+Анализы,,,Общий анализ крови,medium_20_locf_stats.csv
+Дата получения анализов,,,2023-11-29T13:38:00+03:00,medium_20_locf_stats.csv
+Цена приёма (руб),7003.434738871657,6998.0,6908.0,medium_20_locf_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_20_missing_stats.csv
+Страна,,,Казахстан,medium_20_missing_stats.csv
+Паспортые данные,,,1009 856567,medium_20_missing_stats.csv
+СНИЛС,,,100-542-613 80,medium_20_missing_stats.csv
+Номер карты,,,1042 8870 9796 6656,medium_20_missing_stats.csv
+Банк,,,Сбербанк,medium_20_missing_stats.csv
+Платежная система,,,Visa,medium_20_missing_stats.csv
+Симптомы,,,Боль в суставах,medium_20_missing_stats.csv
+Врач,,,Инфекционист,medium_20_missing_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_20_missing_stats.csv
+Анализы,,,Общий анализ крови,medium_20_missing_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_20_missing_stats.csv
+Цена приёма (руб),7002.608872069799,6993.0,10643.0,medium_20_missing_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_20_spline_stats.csv
+Страна,,,Казахстан,medium_20_spline_stats.csv
+Паспортые данные,,,1009 856567,medium_20_spline_stats.csv
+СНИЛС,,,100-542-613 80,medium_20_spline_stats.csv
+Номер карты,,,1042 8870 9796 6656,medium_20_spline_stats.csv
+Банк,,,Сбербанк,medium_20_spline_stats.csv
+Платежная система,,,Visa,medium_20_spline_stats.csv
+Симптомы,,,Боль в суставах,medium_20_spline_stats.csv
+Врач,,,Инфекционист,medium_20_spline_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_20_spline_stats.csv
+Анализы,,,Общий анализ крови,medium_20_spline_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_20_spline_stats.csv
+Цена приёма (руб),7009.309768397456,7004.0,10643.0,medium_20_spline_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_30_hot_deck_stats.csv
+Страна,,,Беларусь,medium_30_hot_deck_stats.csv
+Паспортые данные,,,FH 5452300,medium_30_hot_deck_stats.csv
+СНИЛС,,,853-590-202 24,medium_30_hot_deck_stats.csv
+Номер карты,,,9879 6193 6305 5293,medium_30_hot_deck_stats.csv
+Банк,,,Сбербанк,medium_30_hot_deck_stats.csv
+Платежная система,,,Visa,medium_30_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,medium_30_hot_deck_stats.csv
+Врач,,,Инфекционист,medium_30_hot_deck_stats.csv
+Дата посещения врача,,,2024-05-22T12:45:16+03:00,medium_30_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,medium_30_hot_deck_stats.csv
+Дата получения анализов,,,2023-07-25T08:06:12+03:00,medium_30_hot_deck_stats.csv
+Цена приёма (руб),7010.398792857742,6992.0,3538.0,medium_30_hot_deck_stats.csv
+ФИО,,,Орлова Мила Романовна,medium_30_locf_stats.csv
+Страна,,,Казахстан,medium_30_locf_stats.csv
+Паспортые данные,,,3339 780137,medium_30_locf_stats.csv
+СНИЛС,,,794-768-852 31,medium_30_locf_stats.csv
+Номер карты,,,7404 3976 9712 9491,medium_30_locf_stats.csv
+Банк,,,Сбербанк,medium_30_locf_stats.csv
+Платежная система,,,Visa,medium_30_locf_stats.csv
+Симптомы,,,Боль в суставах,medium_30_locf_stats.csv
+Врач,,,Инфекционист,medium_30_locf_stats.csv
+Дата посещения врача,,,2025-01-23T16:03:51+03:00,medium_30_locf_stats.csv
+Анализы,,,Общий анализ крови,medium_30_locf_stats.csv
+Дата получения анализов,,,2023-05-06T16:51:34+03:00,medium_30_locf_stats.csv
+Цена приёма (руб),7010.340095565429,6998.0,7904.0,medium_30_locf_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_30_missing_stats.csv
+Страна,,,Казахстан,medium_30_missing_stats.csv
+Паспортые данные,,,1062 783473,medium_30_missing_stats.csv
+СНИЛС,,,100-831-493 37,medium_30_missing_stats.csv
+Номер карты,,,1044 2431 8061 8349,medium_30_missing_stats.csv
+Банк,,,Сбербанк,medium_30_missing_stats.csv
+Платежная система,,,Visa,medium_30_missing_stats.csv
+Симптомы,,,Боль в суставах,medium_30_missing_stats.csv
+Врач,,,Инфекционист,medium_30_missing_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_30_missing_stats.csv
+Анализы,,,Общий анализ крови,medium_30_missing_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_30_missing_stats.csv
+Цена приёма (руб),7009.640145792869,7001.0,7495.0,medium_30_missing_stats.csv
+ФИО,,,Дроздова Ольга Марковна,medium_30_spline_stats.csv
+Страна,,,Казахстан,medium_30_spline_stats.csv
+Паспортые данные,,,1062 783473,medium_30_spline_stats.csv
+СНИЛС,,,100-831-493 37,medium_30_spline_stats.csv
+Номер карты,,,1044 2431 8061 8349,medium_30_spline_stats.csv
+Банк,,,Сбербанк,medium_30_spline_stats.csv
+Платежная система,,,Visa,medium_30_spline_stats.csv
+Симптомы,,,Боль в суставах,medium_30_spline_stats.csv
+Врач,,,Инфекционист,medium_30_spline_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_30_spline_stats.csv
+Анализы,,,Общий анализ крови,medium_30_spline_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_30_spline_stats.csv
+Цена приёма (руб),7004.681252716112,7006.0,7495.0,medium_30_spline_stats.csv
+ФИО,,,Костина Римма Романовна,medium_3_hot_deck_stats.csv
+Страна,,,Казахстан,medium_3_hot_deck_stats.csv
+Паспортые данные,,,8715 428732,medium_3_hot_deck_stats.csv
+СНИЛС,,,303-253-429 82,medium_3_hot_deck_stats.csv
+Номер карты,,,5651 7481 3247 4141,medium_3_hot_deck_stats.csv
+Банк,,,Сбербанк,medium_3_hot_deck_stats.csv
+Платежная система,,,Visa,medium_3_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,medium_3_hot_deck_stats.csv
+Врач,,,Инфекционист,medium_3_hot_deck_stats.csv
+Дата посещения врача,,,2023-06-26T08:25:55+03:00,medium_3_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,medium_3_hot_deck_stats.csv
+Дата получения анализов,,,2023-08-19T11:29:12+03:00,medium_3_hot_deck_stats.csv
+Цена приёма (руб),7002.732970072932,6994.0,11806.0,medium_3_hot_deck_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_3_locf_stats.csv
+Страна,,,Казахстан,medium_3_locf_stats.csv
+Паспортые данные,,,2139 185994,medium_3_locf_stats.csv
+СНИЛС,,,150-473-295 23,medium_3_locf_stats.csv
+Номер карты,,,3644 3605 5834 4516,medium_3_locf_stats.csv
+Банк,,,Сбербанк,medium_3_locf_stats.csv
+Платежная система,,,Visa,medium_3_locf_stats.csv
+Симптомы,,,Боль в суставах,medium_3_locf_stats.csv
+Врач,,,Инфекционист,medium_3_locf_stats.csv
+Дата посещения врача,,,2023-07-31T11:36:13+03:00,medium_3_locf_stats.csv
+Анализы,,,Общий анализ крови,medium_3_locf_stats.csv
+Дата получения анализов,,,2023-05-08T21:09:39+03:00,medium_3_locf_stats.csv
+Цена приёма (руб),7006.604007041663,6999.0,3792.0,medium_3_locf_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_3_missing_stats.csv
+Страна,,,Казахстан,medium_3_missing_stats.csv
+Паспортые данные,,,N 8228504,medium_3_missing_stats.csv
+СНИЛС,,,100-347-112 95,medium_3_missing_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_3_missing_stats.csv
+Банк,,,Сбербанк,medium_3_missing_stats.csv
+Платежная система,,,Visa,medium_3_missing_stats.csv
+Симптомы,,,Боль в суставах,medium_3_missing_stats.csv
+Врач,,,Инфекционист,medium_3_missing_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_3_missing_stats.csv
+Анализы,,,Общий анализ крови,medium_3_missing_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_3_missing_stats.csv
+Цена приёма (руб),7002.459927360775,6994.0,3792.0,medium_3_missing_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_3_spline_stats.csv
+Страна,,,Казахстан,medium_3_spline_stats.csv
+Паспортые данные,,,N 8228504,medium_3_spline_stats.csv
+СНИЛС,,,100-347-112 95,medium_3_spline_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_3_spline_stats.csv
+Банк,,,Сбербанк,medium_3_spline_stats.csv
+Платежная система,,,Visa,medium_3_spline_stats.csv
+Симптомы,,,Боль в суставах,medium_3_spline_stats.csv
+Врач,,,Инфекционист,medium_3_spline_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_3_spline_stats.csv
+Анализы,,,Общий анализ крови,medium_3_spline_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_3_spline_stats.csv
+Цена приёма (руб),7007.439780651873,6997.0,3792.0,medium_3_spline_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_5_hot_deck_stats.csv
+Страна,,,Беларусь,medium_5_hot_deck_stats.csv
+Паспортые данные,,,6917 128243,medium_5_hot_deck_stats.csv
+СНИЛС,,,123-921-867 58,medium_5_hot_deck_stats.csv
+Номер карты,,,1305 4127 8282 8516,medium_5_hot_deck_stats.csv
+Банк,,,Сбербанк,medium_5_hot_deck_stats.csv
+Платежная система,,,Visa,medium_5_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,medium_5_hot_deck_stats.csv
+Врач,,,Инфекционист,medium_5_hot_deck_stats.csv
+Дата посещения врача,,,2023-05-08T19:52:44+03:00,medium_5_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,medium_5_hot_deck_stats.csv
+Дата получения анализов,,,2024-02-18T14:05:04+03:00,medium_5_hot_deck_stats.csv
+Цена приёма (руб),6997.732517394585,6984.0,5513.0,medium_5_hot_deck_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_5_locf_stats.csv
+Страна,,,Казахстан,medium_5_locf_stats.csv
+Паспортые данные,,,1609 884316,medium_5_locf_stats.csv
+СНИЛС,,,150-473-295 23,medium_5_locf_stats.csv
+Номер карты,,,2548 9569 4840 8389,medium_5_locf_stats.csv
+Банк,,,Сбербанк,medium_5_locf_stats.csv
+Платежная система,,,Visa,medium_5_locf_stats.csv
+Симптомы,,,Боль в суставах,medium_5_locf_stats.csv
+Врач,,,Инфекционист,medium_5_locf_stats.csv
+Дата посещения врача,,,2023-05-12T09:04:15+03:00,medium_5_locf_stats.csv
+Анализы,,,Общий анализ крови,medium_5_locf_stats.csv
+Дата получения анализов,,,2023-09-17T11:46:10+03:00,medium_5_locf_stats.csv
+Цена приёма (руб),7001.6444127755885,6991.0,11302.0,medium_5_locf_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_5_missing_stats.csv
+Страна,,,Казахстан,medium_5_missing_stats.csv
+Паспортые данные,,,1009 856567,medium_5_missing_stats.csv
+СНИЛС,,,100-347-112 95,medium_5_missing_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_5_missing_stats.csv
+Банк,,,Сбербанк,medium_5_missing_stats.csv
+Платежная система,,,Visa,medium_5_missing_stats.csv
+Симптомы,,,Боль в суставах,medium_5_missing_stats.csv
+Врач,,,Инфекционист,medium_5_missing_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_5_missing_stats.csv
+Анализы,,,Общий анализ крови,medium_5_missing_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_5_missing_stats.csv
+Цена приёма (руб),7000.697997490235,6990.0,11302.0,medium_5_missing_stats.csv
+ФИО,,,Сергеева Ирина Эдуардовна,medium_5_spline_stats.csv
+Страна,,,Казахстан,medium_5_spline_stats.csv
+Паспортые данные,,,1009 856567,medium_5_spline_stats.csv
+СНИЛС,,,100-347-112 95,medium_5_spline_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_5_spline_stats.csv
+Банк,,,Сбербанк,medium_5_spline_stats.csv
+Платежная система,,,Visa,medium_5_spline_stats.csv
+Симптомы,,,Боль в суставах,medium_5_spline_stats.csv
+Врач,,,Инфекционист,medium_5_spline_stats.csv
+Дата посещения врача,,,2023-05-09T20:13:27+03:00,medium_5_spline_stats.csv
+Анализы,,,Общий анализ крови,medium_5_spline_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_5_spline_stats.csv
+Цена приёма (руб),7003.534283290208,6991.0,11302.0,medium_5_spline_stats.csv
+ФИО,,,Карпов Давид Ростиславович,medium_base_stats.csv
+Страна,,,Казахстан,medium_base_stats.csv
+Паспортые данные,,,N 8228504,medium_base_stats.csv
+СНИЛС,,,100-347-112 95,medium_base_stats.csv
+Номер карты,,,1004 1003 9307 6712,medium_base_stats.csv
+Банк,,,Сбербанк,medium_base_stats.csv
+Платежная система,,,Visa,medium_base_stats.csv
+Симптомы,,,Боль в суставах,medium_base_stats.csv
+Врач,,,Инфекционист,medium_base_stats.csv
+Дата посещения врача,,,2023-05-06T20:18:18+03:00,medium_base_stats.csv
+Анализы,,,Общий анализ крови,medium_base_stats.csv
+Дата получения анализов,,,2023-05-08T09:11:42+03:00,medium_base_stats.csv
+Цена приёма (руб),7001.62343867885,6992.0,3792,medium_base_stats.csv
+ФИО,,,Волков Дамир Михайлович,small_10_hot_deck_stats.csv
+Страна,,,Беларусь,small_10_hot_deck_stats.csv
+Паспортые данные,,,N 9076172,small_10_hot_deck_stats.csv
+СНИЛС,,,375-833-507 12,small_10_hot_deck_stats.csv
+Номер карты,,,8073 6998 6787 1379,small_10_hot_deck_stats.csv
+Банк,,,Сбербанк,small_10_hot_deck_stats.csv
+Платежная система,,,Visa,small_10_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,small_10_hot_deck_stats.csv
+Врач,,,Психотерапевт,small_10_hot_deck_stats.csv
+Дата посещения врача,,,2025-04-20T17:25:27+03:00,small_10_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,small_10_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-12T13:45:21+03:00,small_10_hot_deck_stats.csv
+Цена приёма (руб),7066.206387434555,7074.5,2418.0,small_10_hot_deck_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_10_locf_stats.csv
+Страна,,,Беларусь,small_10_locf_stats.csv
+Паспортые данные,,,1665 835051,small_10_locf_stats.csv
+СНИЛС,,,384-246-570 26,small_10_locf_stats.csv
+Номер карты,,,2564 5153 2060 1636,small_10_locf_stats.csv
+Банк,,,Сбербанк,small_10_locf_stats.csv
+Платежная система,,,Visa,small_10_locf_stats.csv
+Симптомы,,,Боль в суставах,small_10_locf_stats.csv
+Врач,,,Психотерапевт,small_10_locf_stats.csv
+Дата посещения врача,,,2024-09-02T14:54:09+03:00,small_10_locf_stats.csv
+Анализы,,,Общий анализ крови,small_10_locf_stats.csv
+Дата получения анализов,,,2023-07-05T21:41:16+03:00,small_10_locf_stats.csv
+Цена приёма (руб),7060.600209424084,7072.0,10318.0,small_10_locf_stats.csv
+ФИО,,,Абрамов Арсений Егорович,small_10_missing_stats.csv
+Страна,,,Беларусь,small_10_missing_stats.csv
+Паспортые данные,,,1130 820596,small_10_missing_stats.csv
+СНИЛС,,,103-802-383 61,small_10_missing_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_10_missing_stats.csv
+Банк,,,Сбербанк,small_10_missing_stats.csv
+Платежная система,,,Visa,small_10_missing_stats.csv
+Симптомы,,,Боль в суставах,small_10_missing_stats.csv
+Врач,,,Психотерапевт,small_10_missing_stats.csv
+Дата посещения врача,,,2024-06-11T16:02:02+03:00,small_10_missing_stats.csv
+Анализы,,,Общий анализ крови,small_10_missing_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_10_missing_stats.csv
+Цена приёма (руб),7058.988095238095,7069.5,2418.0,small_10_missing_stats.csv
+ФИО,,,Абрамов Арсений Егорович,small_10_spline_stats.csv
+Страна,,,Беларусь,small_10_spline_stats.csv
+Паспортые данные,,,1130 820596,small_10_spline_stats.csv
+СНИЛС,,,103-802-383 61,small_10_spline_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_10_spline_stats.csv
+Банк,,,Сбербанк,small_10_spline_stats.csv
+Платежная система,,,Visa,small_10_spline_stats.csv
+Симптомы,,,Боль в суставах,small_10_spline_stats.csv
+Врач,,,Психотерапевт,small_10_spline_stats.csv
+Дата посещения врача,,,2024-06-11T16:02:02+03:00,small_10_spline_stats.csv
+Анализы,,,Общий анализ крови,small_10_spline_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_10_spline_stats.csv
+Цена приёма (руб),7052.756554038717,7062.5,2418.0,small_10_spline_stats.csv
+ФИО,,,Беляева Амира Романовна,small_20_hot_deck_stats.csv
+Страна,,,Беларусь,small_20_hot_deck_stats.csv
+Паспортые данные,,,3095 117605,small_20_hot_deck_stats.csv
+СНИЛС,,,439-601-658 32,small_20_hot_deck_stats.csv
+Номер карты,,,9936 3369 7625 7647,small_20_hot_deck_stats.csv
+Банк,,,Сбербанк,small_20_hot_deck_stats.csv
+Платежная система,,,Visa,small_20_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,small_20_hot_deck_stats.csv
+Врач,,,Диетолог,small_20_hot_deck_stats.csv
+Дата посещения врача,,,2023-07-17T11:15:28+03:00,small_20_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,small_20_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-22T18:05:25+03:00,small_20_hot_deck_stats.csv
+Цена приёма (руб),7074.546701570681,7074.5,2649.0,small_20_hot_deck_stats.csv
+ФИО,,,Борисов Виталий Гаврилович,small_20_locf_stats.csv
+Страна,,,Беларусь,small_20_locf_stats.csv
+Паспортые данные,,,7936 980918,small_20_locf_stats.csv
+СНИЛС,,,425-952-833 83,small_20_locf_stats.csv
+Номер карты,,,1915 6725 1685 3201,small_20_locf_stats.csv
+Банк,,,Сбербанк,small_20_locf_stats.csv
+Платежная система,,,Visa,small_20_locf_stats.csv
+Симптомы,,,Боль в суставах,small_20_locf_stats.csv
+Врач,,,Психотерапевт,small_20_locf_stats.csv
+Дата посещения врача,,,2023-11-18T08:32:07+03:00,small_20_locf_stats.csv
+Анализы,,,Общий анализ крови,small_20_locf_stats.csv
+Дата получения анализов,,,2024-02-05T10:24:37+03:00,small_20_locf_stats.csv
+Цена приёма (руб),7090.541361256544,7116.0,11854.0,small_20_locf_stats.csv
+ФИО,,,Абрамов Арсений Егорович,small_20_missing_stats.csv
+Страна,,,Беларусь,small_20_missing_stats.csv
+Паспортые данные,,,1130 820596,small_20_missing_stats.csv
+СНИЛС,,,111-540-932 66,small_20_missing_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_20_missing_stats.csv
+Банк,,,Сбербанк,small_20_missing_stats.csv
+Платежная система,,,Visa,small_20_missing_stats.csv
+Симптомы,,,Боль в суставах,small_20_missing_stats.csv
+Врач,,,Психотерапевт,small_20_missing_stats.csv
+Дата посещения врача,,,2023-05-02T08:06:16+03:00,small_20_missing_stats.csv
+Анализы,,,Общий анализ крови,small_20_missing_stats.csv
+Дата получения анализов,,,2023-05-03T19:10:09+03:00,small_20_missing_stats.csv
+Цена приёма (руб),7068.516459016393,7074.0,2649.0,small_20_missing_stats.csv
+ФИО,,,Абрамов Арсений Егорович,small_20_spline_stats.csv
+Страна,,,Беларусь,small_20_spline_stats.csv
+Паспортые данные,,,1130 820596,small_20_spline_stats.csv
+СНИЛС,,,111-540-932 66,small_20_spline_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_20_spline_stats.csv
+Банк,,,Сбербанк,small_20_spline_stats.csv
+Платежная система,,,Visa,small_20_spline_stats.csv
+Симптомы,,,Боль в суставах,small_20_spline_stats.csv
+Врач,,,Психотерапевт,small_20_spline_stats.csv
+Дата посещения врача,,,2023-05-02T08:06:16+03:00,small_20_spline_stats.csv
+Анализы,,,Общий анализ крови,small_20_spline_stats.csv
+Дата получения анализов,,,2023-05-03T19:10:09+03:00,small_20_spline_stats.csv
+Цена приёма (руб),7070.032213836884,7075.5,2649.0,small_20_spline_stats.csv
+ФИО,,,Орлов Геннадий Моисеевич,small_30_hot_deck_stats.csv
+Страна,,,Беларусь,small_30_hot_deck_stats.csv
+Паспортые данные,,,8364 578590,small_30_hot_deck_stats.csv
+СНИЛС,,,230-537-539 88,small_30_hot_deck_stats.csv
+Номер карты,,,4113 1452 7788 6690,small_30_hot_deck_stats.csv
+Банк,,,Сбербанк,small_30_hot_deck_stats.csv
+Платежная система,,,Visa,small_30_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,small_30_hot_deck_stats.csv
+Врач,,,Аллерголог,small_30_hot_deck_stats.csv
+Дата посещения врача,,,2023-08-31T20:57:55+03:00,small_30_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,small_30_hot_deck_stats.csv
+Дата получения анализов,,,2023-07-12T19:25:31+03:00,small_30_hot_deck_stats.csv
+Цена приёма (руб),7074.876020942408,7086.0,10499.0,small_30_hot_deck_stats.csv
+ФИО,,,Тихонов Мирон Миронович,small_30_locf_stats.csv
+Страна,,,Беларусь,small_30_locf_stats.csv
+Паспортые данные,,,7936 980918,small_30_locf_stats.csv
+СНИЛС,,,181-787-130 51,small_30_locf_stats.csv
+Номер карты,,,6505 5776 3326 1641,small_30_locf_stats.csv
+Банк,,,Сбербанк,small_30_locf_stats.csv
+Платежная система,,,Visa,small_30_locf_stats.csv
+Симптомы,,,Боль в суставах,small_30_locf_stats.csv
+Врач,,,Гепатолог,small_30_locf_stats.csv
+Дата посещения врача,,,2023-10-25T20:35:43+03:00,small_30_locf_stats.csv
+Анализы,,,Общий анализ крови,small_30_locf_stats.csv
+Дата получения анализов,,,2024-02-05T10:24:37+03:00,small_30_locf_stats.csv
+Цена приёма (руб),7107.552670157068,7141.0,3265.0,small_30_locf_stats.csv
+ФИО,,,Абрамов Арсений Егорович,small_30_missing_stats.csv
+Страна,,,Беларусь,small_30_missing_stats.csv
+Паспортые данные,,,1220 783964,small_30_missing_stats.csv
+СНИЛС,,,118-118-165 41,small_30_missing_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_30_missing_stats.csv
+Банк,,,Сбербанк,small_30_missing_stats.csv
+Платежная система,,,Visa,small_30_missing_stats.csv
+Симптомы,,,Боль в суставах,small_30_missing_stats.csv
+Врач,,,Аллерголог,small_30_missing_stats.csv
+Дата посещения врача,,,2023-05-02T08:06:16+03:00,small_30_missing_stats.csv
+Анализы,,,Общий анализ крови,small_30_missing_stats.csv
+Дата получения анализов,,,2023-05-03T19:10:09+03:00,small_30_missing_stats.csv
+Цена приёма (руб),7075.040570999248,7074.0,2649.0,small_30_missing_stats.csv
+ФИО,,,Абрамов Арсений Егорович,small_30_spline_stats.csv
+Страна,,,Беларусь,small_30_spline_stats.csv
+Паспортые данные,,,1220 783964,small_30_spline_stats.csv
+СНИЛС,,,118-118-165 41,small_30_spline_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_30_spline_stats.csv
+Банк,,,Сбербанк,small_30_spline_stats.csv
+Платежная система,,,Visa,small_30_spline_stats.csv
+Симптомы,,,Боль в суставах,small_30_spline_stats.csv
+Врач,,,Аллерголог,small_30_spline_stats.csv
+Дата посещения врача,,,2023-05-02T08:06:16+03:00,small_30_spline_stats.csv
+Анализы,,,Общий анализ крови,small_30_spline_stats.csv
+Дата получения анализов,,,2023-05-03T19:10:09+03:00,small_30_spline_stats.csv
+Цена приёма (руб),7117.55400745853,7112.309032176048,2649.0,small_30_spline_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_3_hot_deck_stats.csv
+Страна,,,Беларусь,small_3_hot_deck_stats.csv
+Паспортые данные,,,5188 724142,small_3_hot_deck_stats.csv
+СНИЛС,,,716-974-746 82,small_3_hot_deck_stats.csv
+Номер карты,,,2778 3679 5062 4164,small_3_hot_deck_stats.csv
+Банк,,,Сбербанк,small_3_hot_deck_stats.csv
+Платежная система,,,Visa,small_3_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,small_3_hot_deck_stats.csv
+Врач,,,Токсиколог,small_3_hot_deck_stats.csv
+Дата посещения врача,,,2023-12-12T10:30:50+03:00,small_3_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,small_3_hot_deck_stats.csv
+Дата получения анализов,,,2023-05-15T08:55:03+03:00,small_3_hot_deck_stats.csv
+Цена приёма (руб),7062.527643979058,7074.5,2418.0,small_3_hot_deck_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_3_locf_stats.csv
+Страна,,,Беларусь,small_3_locf_stats.csv
+Паспортые данные,,,1391 903388,small_3_locf_stats.csv
+СНИЛС,,,228-951-433 81,small_3_locf_stats.csv
+Номер карты,,,1172 7178 5720 8814,small_3_locf_stats.csv
+Банк,,,Сбербанк,small_3_locf_stats.csv
+Платежная система,,,Visa,small_3_locf_stats.csv
+Симптомы,,,Боль в суставах,small_3_locf_stats.csv
+Врач,,,Психотерапевт,small_3_locf_stats.csv
+Дата посещения врача,,,2023-07-24T11:58:42+03:00,small_3_locf_stats.csv
+Анализы,,,Общий анализ крови,small_3_locf_stats.csv
+Дата получения анализов,,,2023-07-07T16:23:57+03:00,small_3_locf_stats.csv
+Цена приёма (руб),7074.136439790576,7088.5,2418.0,small_3_locf_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_3_missing_stats.csv
+Страна,,,Беларусь,small_3_missing_stats.csv
+Паспортые данные,,,1130 820596,small_3_missing_stats.csv
+СНИЛС,,,100-952-623 23,small_3_missing_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_3_missing_stats.csv
+Банк,,,Сбербанк,small_3_missing_stats.csv
+Платежная система,,,Visa,small_3_missing_stats.csv
+Симптомы,,,Боль в суставах,small_3_missing_stats.csv
+Врач,,,Психотерапевт,small_3_missing_stats.csv
+Дата посещения врача,,,2024-06-11T16:02:02+03:00,small_3_missing_stats.csv
+Анализы,,,Общий анализ крови,small_3_missing_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_3_missing_stats.csv
+Цена приёма (руб),7065.034501347709,7085.0,2418.0,small_3_missing_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_3_spline_stats.csv
+Страна,,,Беларусь,small_3_spline_stats.csv
+Паспортые данные,,,1130 820596,small_3_spline_stats.csv
+СНИЛС,,,100-952-623 23,small_3_spline_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_3_spline_stats.csv
+Банк,,,Сбербанк,small_3_spline_stats.csv
+Платежная система,,,Visa,small_3_spline_stats.csv
+Симптомы,,,Боль в суставах,small_3_spline_stats.csv
+Врач,,,Психотерапевт,small_3_spline_stats.csv
+Дата посещения врача,,,2024-06-11T16:02:02+03:00,small_3_spline_stats.csv
+Анализы,,,Общий анализ крови,small_3_spline_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_3_spline_stats.csv
+Цена приёма (руб),7060.98204568282,7085.0,2418.0,small_3_spline_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_5_hot_deck_stats.csv
+Страна,,,Беларусь,small_5_hot_deck_stats.csv
+Паспортые данные,,,1220 783964,small_5_hot_deck_stats.csv
+СНИЛС,,,150-227-525 33,small_5_hot_deck_stats.csv
+Номер карты,,,1324 3405 2629 6564,small_5_hot_deck_stats.csv
+Банк,,,Сбербанк,small_5_hot_deck_stats.csv
+Платежная система,,,Visa,small_5_hot_deck_stats.csv
+Симптомы,,,Боль в суставах,small_5_hot_deck_stats.csv
+Врач,,,Диетолог,small_5_hot_deck_stats.csv
+Дата посещения врача,,,2023-08-06T08:48:24+03:00,small_5_hot_deck_stats.csv
+Анализы,,,Общий анализ крови,small_5_hot_deck_stats.csv
+Дата получения анализов,,,2023-06-10T18:03:17+03:00,small_5_hot_deck_stats.csv
+Цена приёма (руб),7058.015497382199,7075.5,5709.0,small_5_hot_deck_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_5_locf_stats.csv
+Страна,,,Беларусь,small_5_locf_stats.csv
+Паспортые данные,,,IO 1378255,small_5_locf_stats.csv
+СНИЛС,,,230-541-400 32,small_5_locf_stats.csv
+Номер карты,,,1172 7178 5720 8814,small_5_locf_stats.csv
+Банк,,,Сбербанк,small_5_locf_stats.csv
+Платежная система,,,Visa,small_5_locf_stats.csv
+Симптомы,,,Боль в суставах,small_5_locf_stats.csv
+Врач,,,Психотерапевт,small_5_locf_stats.csv
+Дата посещения врача,,,2023-07-24T11:58:42+03:00,small_5_locf_stats.csv
+Анализы,,,Общий анализ крови,small_5_locf_stats.csv
+Дата получения анализов,,,2023-06-27T20:00:24+03:00,small_5_locf_stats.csv
+Цена приёма (руб),7069.575706806283,7085.0,2418.0,small_5_locf_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_5_missing_stats.csv
+Страна,,,Беларусь,small_5_missing_stats.csv
+Паспортые данные,,,1130 820596,small_5_missing_stats.csv
+СНИЛС,,,100-952-623 23,small_5_missing_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_5_missing_stats.csv
+Банк,,,Сбербанк,small_5_missing_stats.csv
+Платежная система,,,Visa,small_5_missing_stats.csv
+Симптомы,,,Боль в суставах,small_5_missing_stats.csv
+Врач,,,Диетолог,small_5_missing_stats.csv
+Дата посещения врача,,,2024-06-11T16:02:02+03:00,small_5_missing_stats.csv
+Анализы,,,Общий анализ крови,small_5_missing_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_5_missing_stats.csv
+Цена приёма (руб),7062.125013755916,7080.0,2418.0,small_5_missing_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_5_spline_stats.csv
+Страна,,,Беларусь,small_5_spline_stats.csv
+Паспортые данные,,,1130 820596,small_5_spline_stats.csv
+СНИЛС,,,100-952-623 23,small_5_spline_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_5_spline_stats.csv
+Банк,,,Сбербанк,small_5_spline_stats.csv
+Платежная система,,,Visa,small_5_spline_stats.csv
+Симптомы,,,Боль в суставах,small_5_spline_stats.csv
+Врач,,,Диетолог,small_5_spline_stats.csv
+Дата посещения врача,,,2024-06-11T16:02:02+03:00,small_5_spline_stats.csv
+Анализы,,,Общий анализ крови,small_5_spline_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_5_spline_stats.csv
+Цена приёма (руб),7053.866256930123,7072.0,2418.0,small_5_spline_stats.csv
+ФИО,,,Сафронова Зинаида Игнатьевна,small_base_stats.csv
+Страна,,,Беларусь,small_base_stats.csv
+Паспортые данные,,,1130 820596,small_base_stats.csv
+СНИЛС,,,100-952-623 23,small_base_stats.csv
+Номер карты,,,1013 1098 6205 3864,small_base_stats.csv
+Банк,,,Сбербанк,small_base_stats.csv
+Платежная система,,,Visa,small_base_stats.csv
+Симптомы,,,Боль в суставах,small_base_stats.csv
+Врач,,,Токсиколог,small_base_stats.csv
+Дата посещения врача,,,2024-03-23T14:38:23+03:00,small_base_stats.csv
+Анализы,,,Общий анализ крови,small_base_stats.csv
+Дата получения анализов,,,2025-04-04T10:18:39+03:00,small_base_stats.csv
+Цена приёма (руб),7073.169109947644,7090.5,2418,small_base_stats.csv
