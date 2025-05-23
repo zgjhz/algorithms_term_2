@@ -1,18 +1,31 @@
 import sys
 import numpy as np
 import pandas as pd
-from scipy.stats import pearsonr
-from sklearn.datasets import load_breast_cancer
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QHBoxLayout,
     QLabel, QDoubleSpinBox, QSpinBox,
-    QPushButton, QTextEdit, QComboBox
+    QPushButton, QTextEdit, QFileDialog
 )
 
-# === Clustering utilities ===
+# === Вспомогательные функции для кластеризации ===
 
 def pearson_distance_to_center(points: pd.DataFrame, center: pd.Series) -> pd.Series:
-    return points.apply(lambda row: 1 - pearsonr(row, center)[0], axis=1)
+    X = points.values
+    c = center.values
+    X_centered = X - X.mean(axis=1, keepdims=True)
+    c_centered = c - c.mean()
+    row_norms = np.linalg.norm(X_centered, axis=1)
+    center_norm = np.linalg.norm(c_centered)
+    dots = X_centered.dot(c_centered)
+    denom = row_norms * center_norm
+    corr = np.zeros_like(dots)
+    nonzero = denom > 0
+    corr[nonzero] = dots[nonzero] / denom[nonzero]
+    corr = np.clip(corr, -1.0, 1.0)
+    return pd.Series(1 - corr, index=points.index)
+
 
 def forel(data: pd.DataFrame, radius: float) -> pd.Series:
     clusters = []
@@ -34,6 +47,7 @@ def forel(data: pd.DataFrame, radius: float) -> pd.Series:
         labels.loc[members] = i
     return labels
 
+
 def compactness(data: pd.DataFrame, labels: pd.Series) -> float:
     total = 0.0
     for lbl in labels.unique():
@@ -42,156 +56,141 @@ def compactness(data: pd.DataFrame, labels: pd.Series) -> float:
         total += pearson_distance_to_center(pts, center).sum()
     return total / len(data)
 
-def sequential_reduction(df: pd.DataFrame, features: list[str],
-                         radius: float, min_feats: int) -> tuple[list[str], pd.DataFrame]:
+
+def sequential_reduction(df: pd.DataFrame, features: list[str], radius: float, min_feats: int):
     history = []
     current = features.copy()
+    iteration = 1
     while len(current) > min_feats:
         comp_scores = {}
         for feat in current:
-            temp = [f for f in current if f != feat] + ['ID1', 'ID2']
-            lbls = forel(df[temp], radius)
-            comp_scores[feat] = compactness(df[temp], lbls)
+            temp_feats = [f for f in current if f != feat] + ['ID1','ID2']
+            lbls = forel(df[temp_feats], radius)
+            comp_scores[feat] = compactness(df[temp_feats], lbls)
         drop = min(comp_scores, key=comp_scores.get)
-        history.append({'removed': drop,
-                        'remaining_count': len(current)-1 + 2,
-                        'compactness': comp_scores[drop]})
+        remaining = len(current) - 1
+        comp_value = comp_scores[drop]
+        history.append({'Итерация': iteration,
+                        'Удалён признак': drop,
+                        'Осталось признаков': remaining,
+                        'Compactness': comp_value})
         current.remove(drop)
+        iteration += 1
     return current, pd.DataFrame(history)
 
-# === PyQt5 GUI ===
+
+def visualize_clusters(data: pd.DataFrame, labels: pd.Series, title: str):
+    pca = PCA(n_components=2)
+    proj = pca.fit_transform(data)
+    plt.figure(figsize=(5, 4))
+    plt.scatter(proj[:, 0], proj[:, 1], c=labels, cmap='tab10', alpha=0.7)
+    plt.title(title)
+    plt.xlabel('PC1')
+    plt.ylabel('PC2')
+    plt.colorbar(label='Cluster')
+    plt.show()
 
 class ClusteringApp(QWidget):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("FOREL Clustering Interface")
-        self.resize(800, 600)
+        self.setWindowTitle("Кластеризация FOREL с отбором признаков и обезличиванием")
+        self.resize(900, 800)
         self._build_ui()
 
     def _build_ui(self):
         layout = QVBoxLayout()
 
-        # Dataset selector
-        ds_layout = QHBoxLayout()
-        ds_layout.addWidget(QLabel("Dataset:"))
-        self.ds_combo = QComboBox()
-        self.ds_combo.addItem("Breast Cancer (sklearn)")
-        ds_layout.addWidget(self.ds_combo)
-        layout.addLayout(ds_layout)
+        btn_load = QPushButton("Загрузить CSV...")
+        btn_load.clicked.connect(self.load_csv)
+        layout.addWidget(btn_load)
 
-        # Radius input
-        r_layout = QHBoxLayout()
-        r_layout.addWidget(QLabel("FOREL Radius:"))
+        hl1 = QHBoxLayout()
+        hl1.addWidget(QLabel("Радиус:"))
         self.radius_spin = QDoubleSpinBox()
         self.radius_spin.setRange(0.01, 1.0)
-        self.radius_spin.setSingleStep(0.01)
         self.radius_spin.setValue(0.5)
-        r_layout.addWidget(self.radius_spin)
-        layout.addLayout(r_layout)
+        hl1.addWidget(self.radius_spin)
+        layout.addLayout(hl1)
 
-        # Feature count input
-        f_layout = QHBoxLayout()
-        f_layout.addWidget(QLabel("Keep ≥ features:"))
+        hl2 = QHBoxLayout()
+        hl2.addWidget(QLabel("Оставить ≥ признаков:"))
         self.min_feat_spin = QSpinBox()
-        self.min_feat_spin.setRange(2, 30)
+        self.min_feat_spin.setRange(2, 100)
         self.min_feat_spin.setValue(15)
-        f_layout.addWidget(self.min_feat_spin)
-        layout.addLayout(f_layout)
+        hl2.addWidget(self.min_feat_spin)
+        layout.addLayout(hl2)
 
-        # Buttons
-        btn_layout = QHBoxLayout()
-        self.run_btn = QPushButton("Run Clustering")
-        self.run_btn.clicked.connect(self.on_run)
-        btn_layout.addWidget(self.run_btn)
-        self.anon_btn = QPushButton("Advanced Anonymization + Clustering")
-        self.anon_btn.clicked.connect(self.on_anon)
-        btn_layout.addWidget(self.anon_btn)
-        layout.addLayout(btn_layout)
+        btn_run = QPushButton("Запустить кластеризацию и обезличивание")
+        btn_run.clicked.connect(self.on_run)
+        layout.addWidget(btn_run)
 
-        # Output area
         self.output = QTextEdit()
         self.output.setReadOnly(True)
         layout.addWidget(self.output)
-
         self.setLayout(layout)
 
+    def load_csv(self):
+        path, _ = QFileDialog.getOpenFileName(self, "Выберите CSV", "", "CSV файлы (*.csv)")
+        if path:
+            self.csv_path = path
+            self.output.append(f"Загружен набор данных: {path}")
+
     def on_run(self):
-        data = load_breast_cancer()
-        df = pd.DataFrame(data.data, columns=data.feature_names)
+        df_orig = pd.read_csv(self.csv_path)
+        df_orig = df_orig.head(1000)
         np.random.seed(0)
+        df = df_orig.copy()
         df['ID1'] = np.random.rand(len(df))
         df['ID2'] = np.random.rand(len(df))
-
+        feats = [c for c in df.select_dtypes(include=[np.number]).columns if c not in ['ID1','ID2']]
         radius = self.radius_spin.value()
         min_feats = self.min_feat_spin.value()
-        feats = data.feature_names.tolist()
 
-        labels1 = forel(df[feats + ['ID1','ID2']], radius)
-        comp1 = compactness(df[feats + ['ID1','ID2']], labels1)
+        # Кластеризация до обезличивания
+        data_before = df[feats + ['ID1','ID2']]
+        labels_before = forel(data_before, radius)
+        visualize_clusters(df[feats], labels_before, 'Кластеры до обезличивания')
+        sizes_before = labels_before.value_counts().to_dict()
+        comp_before = compactness(data_before, labels_before)
+        self.output.append(f"До обезличивания: размеры кластеров {sizes_before}, compactness = {comp_before:.6e}")
 
-        selected, hist_df = sequential_reduction(df, feats, radius, min_feats)
-        labels2 = forel(df[selected + ['ID1','ID2']], radius)
-        comp2 = compactness(df[selected + ['ID1','ID2']], labels2)
+        # Отбор признаков
+        selected_feats, history = sequential_reduction(df, feats, radius, min_feats)
+        self.output.append(f"Отобраны признаки ({len(selected_feats)}): {selected_feats}")
 
-        df_deid = df[selected]
-        labels3 = forel(df_deid, radius)
-        comp3 = compactness(df_deid, labels3)
+        # История удаления признаков
+        hist_df = history.copy()
+        hist_df['Compactness'] = hist_df['Compactness'].apply(lambda x: f"{x:.6e}")
+        self.output.append("\nИстория удаления признаков:")
+        self.output.append(hist_df.to_string(index=False))
 
-        out = []
-        out.append(f"Initial compactness: {comp1:.6e}")
-        out.append(f"After feature selection ({len(selected)} feats): {comp2:.6e}")
-        out.append(f"After de-identification: {comp3:.6e}")
-        out.append("\nFeature removal history:")
-        out.append(hist_df.to_string(index=False))
-        self.output.setPlainText("\n".join(out))
-
-    def on_anon(self):
-        data = load_breast_cancer()
-        df = pd.DataFrame(data.data, columns=data.feature_names)
-        np.random.seed(0)
-        df['ID1'] = np.random.rand(len(df))
-        df['ID2'] = np.random.rand(len(df))
-
-        radius = self.radius_spin.value()
-        min_feats = self.min_feat_spin.value()
-        feats = data.feature_names.tolist()
-
-        # Feature selection
-        selected, _ = sequential_reduction(df, feats, radius, min_feats)
-        df_sel = df[selected]
-
-        # 3 anonymization techniques:
-        results = []
-        # 1) Drop IDs (already dropped)
-        df_drop = df_sel.copy()
-        lbl_drop = forel(df_drop, radius)
-        comp_drop = compactness(df_drop, lbl_drop)
-        results.append(("Drop IDs", comp_drop))
-
-        # 2) Generalization (quartile binning)
-        df_gen = df_sel.copy()
-        for col in df_gen.columns:
+        # Полное обезличивание
+        df_anon = df[selected_feats].copy()
+        for col in selected_feats:
             try:
-                df_gen[col] = pd.qcut(df_gen[col], q=4, labels=False, duplicates='drop')
-            except Exception:
+                df_anon[col] = pd.qcut(df_anon[col], 4, labels=False, duplicates='drop')
+            except:
                 pass
-        lbl_gen = forel(df_gen, radius)
-        comp_gen = compactness(df_gen, lbl_gen)
-        results.append(("Generalization (quartiles)", comp_gen))
+        for col in selected_feats:
+            df_anon[col] = pd.cut(df_anon[col], 4, labels=False, include_lowest=True)
+        for col in selected_feats:
+            std = df_anon[col].std()
+            df_anon[col] += np.random.normal(0, std * 0.05, len(df_anon))
+        idx = df_anon.index.tolist()
+        np.random.shuffle(idx)
+        for i in range(0, len(idx), 5):
+            grp = idx[i:i+5]
+            mean_vals = df_anon.loc[grp].mean()
+            for col in selected_feats:
+                df_anon.loc[grp, col] = mean_vals[col]
 
-        # 3) Noise addition (5% of std)
-        df_noise = df_sel.copy()
-        for col in df_noise.columns:
-            std = df_noise[col].std()
-            df_noise[col] += np.random.normal(0, std*0.05, size=len(df_noise))
-        lbl_noise = forel(df_noise, radius)
-        comp_noise = compactness(df_noise, lbl_noise)
-        results.append(("Noise addition (5% std)", comp_noise))
-
-        out = ["Advanced Anonymization Results:"]
-        for name, comp in results:
-            out.append(f"{name}: compactness = {comp:.6e}")
-        self.output.setPlainText("\n".join(out))
+        # Кластеризация после обезличивания
+        labels_after = forel(df_anon, radius)
+        visualize_clusters(df_anon, labels_after, 'Кластеры после обезличивания')
+        sizes_after = labels_after.value_counts().to_dict()
+        comp_after = compactness(df_anon, labels_after)
+        self.output.append(f"После обезличивания: размеры кластеров {sizes_after}, compactness = {comp_after:.6e}")
+        self.output.append("Готово.")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
